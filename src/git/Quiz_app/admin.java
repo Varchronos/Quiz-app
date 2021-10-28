@@ -108,7 +108,8 @@ public class admin extends JFrame implements ActionListener {
 	}
     public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==submit) {
-                        System.out.println("hello");
+                        connection con = new connection();
+                        Statement st = 
                 }
     }
 
