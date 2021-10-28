@@ -68,6 +68,16 @@ public class admin extends JFrame implements ActionListener {
         opt4.setBounds(300,150,230,30);
         opt4.setFont(new Font("Arial", Font.BOLD, 14));
         add(opt4);
+
+//        l6 = new JLabel("Option4:");
+//        l6.setFont(new Font("Raleway", Font.BOLD, 28));
+//        l6.setBounds(125,220,375,30);
+//        add(l6);
+//
+//        opt4 = new JTextField(300);
+//        opt4.setBounds(300,150,230,30);
+//        opt4.setFont(new Font("Arial", Font.BOLD, 14));
+//        add(opt4);
                 
         submit = new JButton("Add Question");
         submit.setBounds(100,100,400,200);
@@ -107,9 +117,19 @@ public class admin extends JFrame implements ActionListener {
         setVisible(true);
 	}
     public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==submit) {
-                        connection con = new connection();
-                        Statement st = 
+                if(e.getSource()==submit) {         //submit the data in dbms
+                        connection con = new connection();          //creating connection to dbms
+                        PreparedStatement stmt = con.c.prepareStatement("INSERT INTO question (question,option1,option2,option3,option4,correct_apt) VALUE (?,?,?,?,?,?)");
+//                        stmt.setInt(1,question_no);
+                        stmt.setString(2,question);
+                        stmt.setString(3,opt1);
+                        stmt.setString(4,opt2);
+                        stmt.setString(5,opt3);
+                        stmt.setString(6,opt4);
+                        stmt.setString(7,rightans);
+
+                        int i = stmt.executeUpdate();
+                        System.out.println(i + " Question added");
                 }
     }
 
