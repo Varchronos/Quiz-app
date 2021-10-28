@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class admin extends JFrame implements ActionListener {
         JLabel l1,l2,l3,l4,l5,l6;
@@ -75,7 +77,7 @@ public class admin extends JFrame implements ActionListener {
         opt4.setFont(new Font("Arial", Font.BOLD, 14));
         add(opt4);
 
-//        Submit-Button
+
         submit = new JButton("Add Question");
         submit.setBounds(100,100,400,200);
         submit.setBackground(Color.BLACK);
@@ -117,8 +119,39 @@ public class admin extends JFrame implements ActionListener {
         this.add(l1);
 	}
     public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==submit) {
-                        System.out.println("hello");
+                if(e.getSource()==submit) {         //submit the data in dbms
+                        connection con = new connection();          //creating connection to dbms
+                    PreparedStatement stmt = null;
+                    try {
+                        stmt = con.c.prepareStatement("INSERT INTO question (question,option1,option2,option3,option4,correct_apt) VALUE (?,?,?,?,?,?)");
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+//                        stmt.setInt(1,question_no);
+                    try {
+                        if (stmt != null) {
+                            stmt.setString(2, String.valueOf(question));
+                            stmt.setString(3, String.valueOf(opt1));
+                            stmt.setString(4, String.valueOf(opt2));
+                            stmt.setString(5, String.valueOf(opt3));
+                            stmt.setString(6, String.valueOf(opt4));
+//                        stmt.setString(7,rightans);
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                    int i = 0;
+                    try {
+                        if (stmt != null) {
+                            i = stmt.executeUpdate();
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    System.out.println(i + " Question added");
                 }
     }
 
