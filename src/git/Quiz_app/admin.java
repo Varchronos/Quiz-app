@@ -1,5 +1,7 @@
 package git.Quiz_app;
 
+import git.Quiz_app.Util.jbtn;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,106 +10,106 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class admin extends JFrame implements ActionListener {
-        JLabel l1,l2,l3,l4,l5,l6;
+        JLabel head, Q,o1, o2, o3, o4;
     
 	JTextField question;
     JTextField opt1;
     JTextField opt2;
     JTextField opt3;
     JTextField opt4;
-    JButton submit,clear;
+    jbtn submit,clear; //created a button utility class on Util pkg
 	
 	admin(){
             
 
 
 		setTitle("Quiz App");
-		l1 = new JLabel("Add Question");
-        l1.setFont(new Font("Osward", Font.BOLD, 38));
-        l1.setBounds(170,40,520,40);
-        add(l1);
-        
-        l2 = new JLabel("Question");
-        l2.setFont(new Font("Raleway", Font.BOLD, 28));
-        l2.setBounds(100,100,375,30);
-        add(l2);
+		head = new JLabel("Add Question");
+        head.setFont(new Font("Osward", Font.BOLD, 38));
+        head.setBounds(170,40,520,40);
+        add(head);
 
+        //Question text
+        Q = new JLabel("Question");
+        Q.setFont(new Font("Raleway", Font.BOLD, 15));
+        Q.setBounds(135,120,375,30);
+        add(Q);
+
+        //Text field for question
         question = new JTextField(300);
-        question.setBounds(230,100,230,30);
-        question.setFont(new Font("Arial", Font.BOLD, 14));
+        question.setBounds(205,125,230,20);
+        question.setFont(new Font("Arial", Font.PLAIN, 15));
         add(question);
 
-        l3 = new JLabel("Option1:");
-        l3.setFont(new Font("Raleway", Font.BOLD, 28));
-        l3.setBounds(100,150,375,30);
-        add(l3);
+        //option 1
+        o1 = new JLabel("Option1:");
+        o1.setFont(new Font("Raleway", Font.BOLD, 15));
+        o1.setBounds(135,170,375,30);
+        add(o1);
 
+        //text field for option 1
         opt1 = new JTextField(30);
-        opt1.setBounds(230,150,230,30);
-        opt1.setFont(new Font("Arial", Font.BOLD, 14));
+        opt1.setBounds(205,175,230,20);
+        opt1.setFont(new Font("Arial", Font.BOLD, 15));
         add(opt1);
 
-        l4 = new JLabel("Option2:");
-        l4.setFont(new Font("Raleway", Font.BOLD, 28));
-        l4.setBounds(100,200,375,30);
-        add(l4);
+        //option 2
+        o2 = new JLabel("Option2:");
+        o2.setFont(new Font("Raleway", Font.BOLD, 15));
+        o2.setBounds(135,200,375,30);
+        add(o2);
 
+        //text field for option 2
         opt2 = new JTextField(30);
-        opt2.setBounds(230,200,230,30);
-        opt2.setFont(new Font("Arial", Font.BOLD, 14));
+        opt2.setBounds(205,205,230,20);
+        opt2.setFont(new Font("Arial", Font.BOLD, 15));
         add(opt2);
 
-        l5 = new JLabel("Option3:");
-        l5.setFont(new Font("Raleway", Font.BOLD, 28));
-        l5.setBounds(100,250,375,30);
-        add(l5);
+        //option 3
+        o3 = new JLabel("Option3:");
+        o3.setFont(new Font("Raleway", Font.BOLD, 15));
+        o3.setBounds(135,230,375,30);
+        add(o3);
 
+        //text field for option 3
         opt3 = new JTextField(300);
-        opt3.setBounds(230,250,230,30);
-        opt3.setFont(new Font("Arial", Font.BOLD, 14));
+        opt3.setBounds(205,235,230,20);
+        opt3.setFont(new Font("Arial", Font.BOLD, 15));
         add(opt3);
 
-        l6 = new JLabel("Option4:");
-        l6.setFont(new Font("Raleway", Font.BOLD, 28));
-        l6.setBounds(100,300,375,30);
-        add(l6);
+        //option 4
+        o4 = new JLabel("Option4:");
+        o4.setFont(new Font("Raleway", Font.BOLD, 15));
+        o4.setBounds(135,260,375,30);
+        add(o4);
 
+        //text field for option 4
         opt4 = new JTextField(300);
-        opt4.setBounds(230,300,230,30);
-        opt4.setFont(new Font("Arial", Font.BOLD, 14));
+        opt4.setBounds(205,265,230,20);
+        opt4.setFont(new Font("Arial", Font.BOLD, 15));
         add(opt4);
 
-
-        submit = new JButton("Add Question");
-        submit.setBounds(100,100,400,200);
-        submit.setBackground(Color.BLACK);
-        submit.setForeground(Color.WHITE);
+        //submit button
+        submit = new jbtn("Add Question",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
+        //bg color set using jbtn utility class
+        submit.setForeground(Color.decode("#000000"));
         submit.setFont(new Font("Arial", Font.BOLD, 14));
-        submit.setBounds(170,380,100,30);
+        submit.setBounds(130,340,140,40);
         add(submit);
 
-//        Clear-Button
-        clear = new JButton("CLEAR");
-        clear.setBackground(Color.BLACK);
-        clear.setForeground(Color.WHITE);
+        //Clear-Button
+        clear = new jbtn("CLEAR",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
+        //bg color set using jbtn utility class
+        clear.setForeground(Color.decode("#000000"));
         clear.setFont(new Font("Arial", Font.BOLD, 14));
-        clear.setBounds(330,380,100,30);
+        clear.setBounds(330,340,140,40);
         add(clear);
 
         
         setLayout(null);
-        
-
-        
-
-        
-
-        
         submit.addActionListener(this);
         clear.addActionListener(this);
-
-        
-        getContentPane().setBackground(Color.WHITE);
+        getContentPane().setBackground(Color.decode("#f4f4f4"));
         
         setSize(800,480);
         setLocation(550,200);
@@ -116,7 +118,7 @@ public class admin extends JFrame implements ActionListener {
         this.setResizable(false);
         this.setSize(600,500);
         this.setVisible(true);
-        this.add(l1);
+        this.add(head);
 	}
     public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==submit) {         //submit the data in dbms
@@ -130,6 +132,7 @@ public class admin extends JFrame implements ActionListener {
 //                        stmt.setInt(1,question_no);
                     try {
                         if (stmt != null) {
+
                             stmt.setString(2, String.valueOf(question));
                             stmt.setString(3, String.valueOf(opt1));
                             stmt.setString(4, String.valueOf(opt2));
@@ -153,6 +156,8 @@ public class admin extends JFrame implements ActionListener {
                     }
                     System.out.println(i + " Question added");
                 }
+
+
     }
 
 }
