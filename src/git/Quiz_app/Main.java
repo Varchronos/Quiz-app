@@ -49,7 +49,7 @@ public class Main extends JFrame implements ActionListener {
         add(p);
 
 
-        login = new jbtn("CLEAR",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
+        login = new jbtn("Login",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
         //bg color set using jbtn utility class
         login.setForeground(Color.decode("#000000"));
         login.setFont(new Font("Arial", Font.BOLD, 14));
@@ -63,8 +63,8 @@ public class Main extends JFrame implements ActionListener {
 
     }
     public static void main(String[] args) {
-//    	admin a = new admin();
-        Main m = new Main();
+    	admin a = new admin();
+//        Main m = new Main();
     	}
 
     public void actionPerformed(ActionEvent e){

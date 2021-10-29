@@ -10,9 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class admin extends JFrame implements ActionListener {
-        JLabel head, Q,o1, o2, o3, o4;
+        JLabel head, Q,o1, o2, o3, o4,ans;
     
-	JTextField question;
+	JTextField question,an;
     JTextField opt1;
     JTextField opt2;
     JTextField opt3;
@@ -40,6 +40,18 @@ public class admin extends JFrame implements ActionListener {
         question.setBounds(205,125,230,20);
         question.setFont(new Font("Arial", Font.PLAIN, 15));
         add(question);
+
+        //answer text
+        ans = new JLabel("Answer");
+        ans.setFont(new Font("Raleway", Font.BOLD, 15));
+        ans.setBounds(135,150,375,30);
+        add(ans);
+
+        //text field for ans text
+        an = new JTextField(300);
+        an.setFont(new Font("Arial", Font.PLAIN, 15));
+        an.setBounds(205,155,230,20);
+        add(an);
 
         //option 1
         o1 = new JLabel("Option1:");
@@ -131,14 +143,14 @@ public class admin extends JFrame implements ActionListener {
                     }
 //                        stmt.setInt(1,question_no);
                     try {
-                        if (stmt != null) {
+                        if (stmt != null){
 
                             stmt.setString(2, String.valueOf(question));
                             stmt.setString(3, String.valueOf(opt1));
                             stmt.setString(4, String.valueOf(opt2));
                             stmt.setString(5, String.valueOf(opt3));
                             stmt.setString(6, String.valueOf(opt4));
-//                        stmt.setString(7,rightans);
+                            stmt.setString(7,String.valueOf(an));
                         }
 
                     } catch (SQLException ex) {
@@ -156,8 +168,6 @@ public class admin extends JFrame implements ActionListener {
                     }
                     System.out.println(i + " Question added");
                 }
-
-
     }
 
 }
