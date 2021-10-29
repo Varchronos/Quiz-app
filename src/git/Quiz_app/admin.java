@@ -23,7 +23,7 @@ public class admin extends JFrame implements ActionListener {
             
 
 
-		setTitle("Quiz App");
+		setTitle("Admin Panel");
 		head = new JLabel("Add Question");
         head.setFont(new Font("Osward", Font.BOLD, 38));
         head.setBounds(170,40,520,40);
