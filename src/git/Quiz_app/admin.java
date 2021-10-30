@@ -6,8 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class admin extends JFrame implements ActionListener {
         JLabel head, Q,o1, o2, o3, o4,ans;
@@ -134,39 +133,23 @@ public class admin extends JFrame implements ActionListener {
 	}
     public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==submit) {         //submit the data in dbms
-                        connection con = new connection();          //creating connection to dbms
-                    PreparedStatement stmt = null;
                     try {
-                        stmt = con.c.prepareStatement("INSERT INTO question (question,option1,option2,option3,option4,correct_apt) VALUE (?,?,?,?,?,?)");
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-//                        stmt.setInt(1,question_no);
-                    try {
-                        if (stmt != null){
-
-                            stmt.setString(2, String.valueOf(question));
-                            stmt.setString(3, String.valueOf(opt1));
-                            stmt.setString(4, String.valueOf(opt2));
-                            stmt.setString(5, String.valueOf(opt3));
-                            stmt.setString(6, String.valueOf(opt4));
-                            stmt.setString(7,String.valueOf(an));
-                        }
-
-                    } catch (SQLException ex) {
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app", "root", "root");
+                        Statement s = c.createStatement();         //creating connection to dbms
+                        System.out.println(c);
+                        String query = "INSERT INTO question (question_no,question,option1,option2,option3,option4,correct_opt) VALUES (DEFAULT,'"+question.getText()
+                                + "','" + opt1.getText()
+                                + "','" + opt2.getText() + "','" + opt3.getText() + "','" + opt4.getText() + "','" + an.getText() + "');";
+                        System.out.println(query);
+                        s.executeUpdate(query);
+                        s.close();
+                        c.close();
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
 
-
-                    int i = 0;
-                    try {
-                        if (stmt != null) {
-                            i = stmt.executeUpdate();
-                        }
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                    System.out.println(i + " Question added");
+                    System.out.println( " Question added");
                 }
     }
 
