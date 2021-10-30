@@ -137,11 +137,17 @@ public class admin extends JFrame implements ActionListener {
                         Class.forName("com.mysql.cj.jdbc.Driver");
                         Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app", "root", "root");
                         Statement s = c.createStatement();         //creating connection to dbms
-                        System.out.println(c);
-                        String query = "INSERT INTO question (question_no,question,option1,option2,option3,option4,correct_opt) VALUES (DEFAULT,'"+question.getText()
+
+                        //Query for adding questions
+                        String query = "INSERT INTO question (question_no,question,option1,option2,option3,option4,correct_opt) VALUES (DEFAULT,'"
+                                + question.getText()
                                 + "','" + opt1.getText()
-                                + "','" + opt2.getText() + "','" + opt3.getText() + "','" + opt4.getText() + "','" + an.getText() + "');";
-                        System.out.println(query);
+                                + "','" + opt2.getText()
+                                + "','" + opt3.getText()
+                                + "','" + opt4.getText()
+                                + "','" + an.getText()
+                                + "');";
+
                         s.executeUpdate(query);
                         s.close();
                         c.close();
@@ -150,6 +156,9 @@ public class admin extends JFrame implements ActionListener {
                     }
 
                     System.out.println( " Question added");
+                }
+                else if(e.getSource()==clear){
+
                 }
     }
 
