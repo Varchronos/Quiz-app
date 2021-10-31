@@ -57,6 +57,7 @@ public class Main extends JFrame implements ActionListener {
         login = new jbtn("Login",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
         login.setFont(new Font("Arial", Font.BOLD, 14));
         login.addActionListener(this);
+        login.setCursor(new Cursor(Cursor.HAND_CURSOR));
         body.add(login,"span,align center,wrap 2px");
         //admin link
         lnk = new JButton("Are you admin? Click here");
@@ -71,20 +72,10 @@ public class Main extends JFrame implements ActionListener {
 
 
 
-
-
-
-
-
-
-
-
-
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-
         this.setSize(500,300);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
     }
@@ -93,7 +84,7 @@ public class Main extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource()==lnk){
             this.dispose();
-            admin a = new admin();
+            admin_add a = new admin_add();
         }
     }
     public static void main(String[] args) {

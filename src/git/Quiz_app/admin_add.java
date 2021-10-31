@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class admin extends JFrame implements ActionListener {
+public class admin_add extends JFrame implements ActionListener {
     JPanel header;
     JPanel body;
     JLabel head, Q,o1, o2, o3, o4,ans;
@@ -22,7 +22,8 @@ public class admin extends JFrame implements ActionListener {
     jbtn submit,clear;
     JButton lnk ;
 
-    admin(){
+    admin_add(){
+        setTitle("Admin add questions");
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));
 
@@ -94,12 +95,14 @@ public class admin extends JFrame implements ActionListener {
         submit = new jbtn("ADD",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
         submit.setForeground(Color.decode("#000000"));
         submit.setFont(new Font("Arial", Font.BOLD, 14));
+        submit.setCursor(new Cursor(Cursor.HAND_CURSOR));
         submit.addActionListener(this);
         body.add(submit,"span,wmin 100, wmax 100,align center,split2");
         //clear
         clear = new jbtn("CLEAR",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
         clear.setFont(new Font("Arial", Font.BOLD, 14));
         clear.setForeground(Color.decode("#000000"));
+        clear.setCursor(new Cursor(Cursor.HAND_CURSOR));
         body.add(clear,"wmin 100, wmax 100,wrap 2px");
         clear.addActionListener(this);
         //Login link
@@ -115,9 +118,9 @@ public class admin extends JFrame implements ActionListener {
 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
-
+        this.setResizable(false);
         this.setSize(500,400);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
     }
