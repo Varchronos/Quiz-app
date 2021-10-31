@@ -1,6 +1,7 @@
 package git.Quiz_app;
 
 import git.Quiz_app.Util.jbtn;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,128 +10,117 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class admin extends JFrame implements ActionListener {
-        JLabel head, Q,o1, o2, o3, o4,ans;
-    
-	JTextField question,an;
+    JPanel header;
+    JPanel body;
+    JLabel head, Q,o1, o2, o3, o4,ans;
+
+    JTextField question,an;
     JTextField opt1;
     JTextField opt2;
     JTextField opt3;
     JTextField opt4;
-    jbtn submit,clear; //created a button utility class on Util pkg
-	
-	admin(){
-            
+    jbtn submit,clear;
+    JButton lnk ;
 
+    admin(){
+        this.setLayout(new BorderLayout());
+        getContentPane().setBackground(Color.decode("#f4f4f4"));
 
-		setTitle("Admin Panel");
-		head = new JLabel("Add Question");
+        //header panel
+        header = new JPanel();
+        header.setPreferredSize(new Dimension(100,100));
+        header.setLayout(new MigLayout("fill","",""));
+        header.setBackground(Color.decode("#f4f4f4"));
+        this.add(header,BorderLayout.NORTH);
+        //top text head on header panel
+        head = new JLabel("Add Question");
         head.setFont(new Font("Osward", Font.BOLD, 38));
-        head.setBounds(170,40,520,40);
-        add(head);
+        header.add(head,"align center , span");
 
-        //Question text
-        Q = new JLabel("Question");
+        //body Panel
+        body = new JPanel();
+        body.setPreferredSize(new Dimension(400,600));
+        body.setBackground(Color.decode("#f4f4f4"));
+        this.add(body,BorderLayout.CENTER);
+        body.setLayout(new MigLayout("","[:70, grow, center][grow, left]",""));
+        //question
+        Q = new JLabel("Question:");
         Q.setFont(new Font("Raleway", Font.BOLD, 15));
-        Q.setBounds(135,120,375,30);
-        add(Q);
-
-        //Text field for question
         question = new JTextField(300);
         question.setBounds(205,125,230,20);
-        question.setFont(new Font("Arial", Font.PLAIN, 15));
-        add(question);
-
-        //answer text
-        ans = new JLabel("Answer");
+        body.add(Q,"align right");
+        body.add(question,"wmin 230, wmax 230,align left,wrap");
+        //ans
+        ans = new JLabel("Answer:");
         ans.setFont(new Font("Raleway", Font.BOLD, 15));
-        ans.setBounds(135,150,375,30);
-        add(ans);
-
-        //text field for ans text
         an = new JTextField(300);
         an.setFont(new Font("Arial", Font.PLAIN, 15));
-        an.setBounds(205,155,230,20);
-        add(an);
-
+        body.add(ans,"align right");
+        body.add(an,"wmin 230, wmax 230,align left, wrap");
         //option 1
         o1 = new JLabel("Option1:");
         o1.setFont(new Font("Raleway", Font.BOLD, 15));
-        o1.setBounds(135,170,375,30);
-        add(o1);
-
-        //text field for option 1
         opt1 = new JTextField(30);
         opt1.setBounds(205,175,230,20);
-        opt1.setFont(new Font("Arial", Font.BOLD, 15));
-        add(opt1);
-
+        body.add(o1,"align right");
+        body.add(opt1,"wmin 230 ,wmax 230,align left ,wrap");
         //option 2
         o2 = new JLabel("Option2:");
         o2.setFont(new Font("Raleway", Font.BOLD, 15));
-        o2.setBounds(135,200,375,30);
-        add(o2);
-
-        //text field for option 2
         opt2 = new JTextField(30);
         opt2.setBounds(205,205,230,20);
-        opt2.setFont(new Font("Arial", Font.BOLD, 15));
-        add(opt2);
-
+        body.add(o2,"align right");
+        body.add(opt2,"wmin 230, wmax 230 ,align left ,wrap");
         //option 3
         o3 = new JLabel("Option3:");
         o3.setFont(new Font("Raleway", Font.BOLD, 15));
-        o3.setBounds(135,230,375,30);
-        add(o3);
-
-        //text field for option 3
         opt3 = new JTextField(300);
         opt3.setBounds(205,235,230,20);
-        opt3.setFont(new Font("Arial", Font.BOLD, 15));
-        add(opt3);
-
+        body.add(o3,"align right");
+        body.add(opt3,"wmin 230, wmax 230,align left ,wrap");
         //option 4
         o4 = new JLabel("Option4:");
         o4.setFont(new Font("Raleway", Font.BOLD, 15));
-        o4.setBounds(135,260,375,30);
-        add(o4);
-
-        //text field for option 4
         opt4 = new JTextField(300);
         opt4.setBounds(205,265,230,20);
-        opt4.setFont(new Font("Arial", Font.BOLD, 15));
-        add(opt4);
+        body.add(o4,"align right");
+        body.add(opt4,"wmin 230, wmax 230,align left,wrap 20px");
+
+
+
+
 
         //submit button
-        submit = new jbtn("Add Question",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
-        //bg color set using jbtn utility class
+        submit = new jbtn("ADD",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
         submit.setForeground(Color.decode("#000000"));
         submit.setFont(new Font("Arial", Font.BOLD, 14));
-        submit.setBounds(130,340,140,40);
-        add(submit);
-
-        //Clear-Button
-        clear = new jbtn("CLEAR",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
-        //bg color set using jbtn utility class
-        clear.setForeground(Color.decode("#000000"));
-        clear.setFont(new Font("Arial", Font.BOLD, 14));
-        clear.setBounds(330,340,140,40);
-        add(clear);
-
-        
-        setLayout(null);
         submit.addActionListener(this);
+        body.add(submit,"span,wmin 100, wmax 100,align center,split2");
+        //clear
+        clear = new jbtn("CLEAR",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
+        clear.setFont(new Font("Arial", Font.BOLD, 14));
+        clear.setForeground(Color.decode("#000000"));
+        body.add(clear,"wmin 100, wmax 100,wrap 2px");
         clear.addActionListener(this);
-        getContentPane().setBackground(Color.decode("#f4f4f4"));
-        
-        setSize(800,480);
-        setLocation(550,200);
-        setVisible(true);
+        //Login link
+        lnk = new JButton("Return to Login? Click here");
+        lnk.setFont(new Font("Raleway", Font.BOLD, 10));
+        lnk.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        lnk.setFocusPainted(false);
+        lnk.setForeground(Color.decode("#193498"));
+        lnk.setBackground(Color.decode("#f4f4f4"));
+        lnk.setBorderPainted(false);
+        lnk.addActionListener(this);
+        body.add(lnk,"span,align center,wrap");
+
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.setSize(600,500);
+        this.setResizable(true);
+
+        this.setSize(500,400);
         this.setVisible(true);
-        this.add(head);
-	}
+
+    }
     public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==submit) {         //submit the data in dbms
                     try {
@@ -158,7 +148,17 @@ public class admin extends JFrame implements ActionListener {
                     System.out.println( " Question added");
                 }
                 else if(e.getSource()==clear){
+                    question.setText("");
+                    an.setText("");
+                    opt1.setText("");
+                    opt2.setText("");
+                    opt3.setText("");
+                    opt4.setText("");
+                }
 
+                if(e.getSource()==lnk){
+                    this.dispose();
+                    Main m = new Main();
                 }
     }
 

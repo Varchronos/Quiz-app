@@ -99,7 +99,7 @@ public class Main extends JFrame implements ActionListener {
     public static void main(String[] args) {
 //    	admin a = new admin();
         Main m = new Main();
-//    test t = new test();
+//    test t = new test(); this is commented right now
     }
 
 }
