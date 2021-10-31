@@ -1,6 +1,5 @@
 package git.Quiz_app;
 
-
 import git.Quiz_app.Util.jbtn;
 import net.miginfocom.swing.MigLayout;
 
@@ -9,28 +8,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
-public class Main extends JFrame implements ActionListener {
+public class admin_login extends JFrame implements ActionListener {
     JPanel header;
     JPanel body;
-    JLabel top,username,regID;
-    JTextField uname, reg;
+    JLabel top,username, password;
+    JTextField uname;
+    JPasswordField pass;
     jbtn login;
     JButton lnk;
-
-    Main(){
+    admin_login(){
+        setTitle("Admin Login");
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));
 
         //header panel
         header = new JPanel();
         header.setPreferredSize(new Dimension(100,100));
-        header.setLayout(new MigLayout());
+        header.setLayout(new MigLayout("fill"));
         header.setBackground(Color.decode("#f4f4f4"));
         this.add(header,BorderLayout.NORTH);
         //top text head on header panel
-        top = new JLabel("Welcome To Quiz App",JLabel.CENTER);
+        top = new JLabel("Admin Login",JLabel.CENTER);
         top.setFont(new Font("Osward", Font.BOLD, 38));
         header.add(top,"push,grow");
 
@@ -47,12 +45,12 @@ public class Main extends JFrame implements ActionListener {
         uname.setFont(new Font("Arial", Font.PLAIN, 20));
         body.add(username,"align right");
         body.add(uname,"wmin 230,wrap");
-        regID = new JLabel("ID:");
-        regID.setFont(new Font("Raleway", Font.BOLD, 25));
-        reg = new JTextField();
-        reg.setFont(new Font("Arial", Font.PLAIN, 20));
-        body.add(regID,"align right");
-        body.add(reg,"wmin 230, wrap 20px");
+        password = new JLabel("Password:");
+        password.setFont(new Font("Raleway", Font.BOLD, 25));
+        pass = new JPasswordField();
+        pass.setFont(new Font("Arial", Font.PLAIN, 20));
+        body.add(password,"align right");
+        body.add(pass,"wmin 230, wrap 20px");
         //login button
         login = new jbtn("Login",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
         login.setFont(new Font("Arial", Font.BOLD, 14));
@@ -60,7 +58,7 @@ public class Main extends JFrame implements ActionListener {
         login.setCursor(new Cursor(Cursor.HAND_CURSOR));
         body.add(login,"span,align center,wrap 2px");
         //admin link
-        lnk = new JButton("Are you an Admin? Click here");
+        lnk = new JButton("Return to Login? Click here");
         lnk.setFont(new Font("Raleway", Font.BOLD, 10));
         lnk.setCursor(new Cursor(Cursor.HAND_CURSOR));
         lnk.setFocusPainted(false);
@@ -77,21 +75,31 @@ public class Main extends JFrame implements ActionListener {
         this.setSize(500,300);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-
     }
-
     @Override
-    public void actionPerformed(ActionEvent evt){
-        if(evt.getSource()==lnk){
-            this.dispose();
-            admin_login al = new admin_login();
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==login){
+            if(uname.getText().equals("Admin")){
+                if(pass.getText().equals("root")){
+                    this.dispose();
+                    admin_add a = new admin_add();
+                }
+                else
+                {
+                    System.out.println("wrong username or password!!!");
+                    System.out.println(pass.getPassword());
+                    JOptionPane.showMessageDialog(null,"You have input wrong username or Password!!!","Error",JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+            else {
+                System.out.println("wrong username or pass");
+                JOptionPane.showMessageDialog(null,"You have input wrong Username or Password!!!","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if(e.getSource()==lnk){
+            Main m = new Main();
         }
     }
-    public static void main(String[] args) {
-//    	admin_add a = new admin_add();
-        Main m = new Main();
-//    test t = new test(); this is commented right now
-//    admin_login log = new admin_login();
-    }
-
 }

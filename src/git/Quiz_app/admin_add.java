@@ -106,7 +106,7 @@ public class admin_add extends JFrame implements ActionListener {
         body.add(clear,"wmin 100, wmax 100,wrap 2px");
         clear.addActionListener(this);
         //Login link
-        lnk = new JButton("Return to Login? Click here");
+        lnk = new JButton("Return to Admin Panel? Click here");
         lnk.setFont(new Font("Raleway", Font.BOLD, 10));
         lnk.setCursor(new Cursor(Cursor.HAND_CURSOR));
         lnk.setFocusPainted(false);
@@ -161,7 +161,7 @@ public class admin_add extends JFrame implements ActionListener {
 
                 if(e.getSource()==lnk){
                     this.dispose();
-                    Main m = new Main();
+                    admin_login am = new admin_login();
                 }
     }
 
