@@ -127,3 +127,25 @@
 //
 //    }
 //}
+/*
+int del[];
+while(del[]
+* */
+//DELETE FROM question WHERE question_no=$NUMBER;
+//ALTER question SET question_no=$NUMBER where question_no=$MAXQUESTION
+
+//SELECT COUNT(*) FROM question;
+
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class test extends JFrame implements ActionListener {
+    test(){
+
+    }
+    public void actionPerformed(ActionEvent e){
+
+    }
+}

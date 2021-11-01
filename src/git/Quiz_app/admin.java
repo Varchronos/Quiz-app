@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -14,7 +15,7 @@ public class admin extends JFrame implements ActionListener {
 
 
 
-ArrayList<JButton> list = new ArrayList<>();
+ArrayList<JToggleButton> list = new ArrayList<>();
 JLabel head,h2;
 JPanel header,bottom,body, left;
 JScrollPane scroll;
@@ -46,20 +47,43 @@ admin(){
 
     body = new JPanel();
     body.setPreferredSize(new Dimension(700,600));
-    body.setBackground(Color.decode("#333"));
+//    body.setBackground(Color.decode("#333"));
     this.add(body,BorderLayout.CENTER);
     body.setLayout(new GridLayout(0,1,0,0));
 
     //SQL QUERY GOES HERE
-    for(int i = 0; i<20;i++)
-    {
-    JToggleButton j =new JToggleButton(i+"hello");
-    j.setBackground(Color.white);
-    j.setBorderPainted(false);
-    j.setFocusPainted(false);
-    j.setFont(new Font("Raleway", Font.BOLD, 15));
-    j.setBounds(0,0,500,5);
-    body.add(j);
+    ResultSet rs;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app", "root", "root");
+        Statement s = c.createStatement();
+        String query = "SELECT * FROM question;";
+        rs = s.executeQuery(query);
+        int i=1;
+        while(rs.next()){
+            JToggleButton x = new JToggleButton(i + ". " + rs.getString(2));
+            x.setBackground(Color.white);
+            x.setBorderPainted(false);
+            x.setFocusPainted(false);
+            x.setFont(new Font("Raleway", Font.BOLD, 15));
+            x.setBounds(0,0,500,5);
+            body.add(x);
+            i++;
+        }
+
+//        while (rs.nxt()) {
+////            =new JToggleButton(  "hello");
+////            j.setBackground(Color.white);
+////            j.setBorderPainted(false);
+////            j.setFocusPainted(false);
+////            j.setFont(new Font("Raleway", Font.BOLD, 15));
+////            j.setBounds(0,0,500,5);
+////            body.add(j);e
+//        }
+    }
+    catch(Exception exec){
+//        System.out.println(exec);
+        System.out.println("End of table reached");
     }
     scroll = new JScrollPane(body);
     scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
