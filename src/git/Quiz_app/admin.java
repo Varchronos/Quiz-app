@@ -8,16 +8,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.ArrayList;
+
 
 
 public class admin extends JFrame implements ActionListener {
 
 
 
-ArrayList<JToggleButton> list = new ArrayList<>();
+
 JLabel head,h2,qn;
-JPanel header,bottom,body, left;
+JPanel header,bottom,body;
 JScrollPane scroll;
 jbtn clear, add;
 JButton lnk;
@@ -62,13 +62,14 @@ admin(){
         String query = "SELECT * FROM question;";
         rs = s.executeQuery(query);
         int i=1;
-        while(rs.next()){
+
+        while(rs.next()) {
             x = new JToggleButton(i + ". " + rs.getString(2));
             x.setBackground(Color.white);
             x.setBorderPainted(false);
             x.setFocusPainted(false);
             x.setFont(new Font("Raleway", Font.BOLD, 15));
-            x.setBounds(0,0,500,5);
+            x.setBounds(0, 0, 500, 5);
             body.add(x);
             i++;
         }
@@ -157,7 +158,7 @@ admin(){
         } catch (SQLException | ClassNotFoundException em) {
             System.out.println(em);
         }
-        JOptionPane.showMessageDialog(null,"Question has been deleted!!!","Success", JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(null,"Question has been deleted!!!","Success", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
         admin ad = new admin();
     }

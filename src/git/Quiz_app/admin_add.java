@@ -153,7 +153,7 @@ public class admin_add extends JFrame implements ActionListener {
                     opt2.setText("");
                     opt3.setText("");
                     opt4.setText("");
-                    JOptionPane.showMessageDialog(null,"Question has been added!!!","Successfull", JOptionPane.OK_OPTION);
+                    JOptionPane.showMessageDialog(null,"Question has been added!!!","Successfull", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                     admin ad = new admin();
                     System.out.println( " Question added");
