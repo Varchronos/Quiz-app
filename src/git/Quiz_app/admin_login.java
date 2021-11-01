@@ -82,7 +82,7 @@ public class admin_login extends JFrame implements ActionListener {
             if(uname.getText().equals("Admin")){
                 if(pass.getText().equals("root")){
                     this.dispose();
-                    admin_add a = new admin_add();
+                    admin a = new admin();
                 }
                 else
                 {
@@ -99,6 +99,7 @@ public class admin_login extends JFrame implements ActionListener {
         }
 
         if(e.getSource()==lnk){
+            this.dispose();
             Main m = new Main();
         }
     }

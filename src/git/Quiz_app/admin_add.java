@@ -161,7 +161,7 @@ public class admin_add extends JFrame implements ActionListener {
 
                 if(e.getSource()==lnk){
                     this.dispose();
-                    admin_login am = new admin_login();
+
                 }
     }
 

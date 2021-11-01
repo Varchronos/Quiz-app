@@ -92,6 +92,7 @@ public class Main extends JFrame implements ActionListener {
         Main m = new Main();
 //    test t = new test(); this is commented right now
 //    admin_login log = new admin_login();
+//        admin add = new admin();
     }
 
 }
