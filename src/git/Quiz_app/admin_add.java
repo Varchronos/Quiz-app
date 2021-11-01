@@ -117,7 +117,7 @@ public class admin_add extends JFrame implements ActionListener {
         body.add(lnk,"span,align center,wrap");
 
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setSize(500,400);
         this.setLocationRelativeTo(null);

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class admin extends JFrame implements ActionListener {
 
 
+
 ArrayList<JButton> list = new ArrayList<>();
 JLabel head,h2;
 JPanel header,bottom,body, left;
@@ -22,6 +23,7 @@ JButton lnk;
 
 
 admin(){
+    setTitle("admin panel");
     this.setLayout(new BorderLayout());
     getContentPane().setBackground(Color.decode("#f4f4f4"));
 
@@ -51,7 +53,7 @@ admin(){
     //SQL QUERY GOES HERE
     for(int i = 0; i<20;i++)
     {
-    JButton j =new JButton(i+"hello");
+    JToggleButton j =new JToggleButton(i+"hello");
     j.setBackground(Color.white);
     j.setBorderPainted(false);
     j.setFocusPainted(false);
@@ -70,7 +72,7 @@ admin(){
     bottom.setLayout(new MigLayout("","[:70, grow, center][grow, left]",""));
     bottom.setBackground(Color.decode("#f4f4f4"));
     this.add(bottom, BorderLayout.SOUTH);
-    clear = new jbtn("CLEAR",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
+    clear = new jbtn("REMOVE",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
     add = new jbtn("ADD",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
     bottom.add(clear,"span,wmin 100, wmax 100,align center,split2");
     bottom.add(add,"wmin 100, wmax 100,wrap 2px");
