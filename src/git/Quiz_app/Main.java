@@ -89,10 +89,10 @@ public class Main extends JFrame implements ActionListener {
     }
     public static void main(String[] args) {
 //    	admin_add a = new admin_add();
-//        Main m = new Main();
+        Main m = new Main();
 //        test t = new test(); //this is commented right now
 //    admin_login log = new admin_login();
-        admin add = new admin();
+//        admin add = new admin();
     }
 
 }

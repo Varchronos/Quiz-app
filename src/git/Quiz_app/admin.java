@@ -16,11 +16,13 @@ public class admin extends JFrame implements ActionListener {
 
 
 ArrayList<JToggleButton> list = new ArrayList<>();
-JLabel head,h2;
+JLabel head,h2,qn;
 JPanel header,bottom,body, left;
 JScrollPane scroll;
 jbtn clear, add;
 JButton lnk;
+JToggleButton x;
+JTextField drop;
 
 
 admin(){
@@ -61,7 +63,7 @@ admin(){
         rs = s.executeQuery(query);
         int i=1;
         while(rs.next()){
-            JToggleButton x = new JToggleButton(i + ". " + rs.getString(2));
+            x = new JToggleButton(i + ". " + rs.getString(2));
             x.setBackground(Color.white);
             x.setBorderPainted(false);
             x.setFocusPainted(false);
@@ -70,19 +72,11 @@ admin(){
             body.add(x);
             i++;
         }
-
-//        while (rs.nxt()) {
-////            =new JToggleButton(  "hello");
-////            j.setBackground(Color.white);
-////            j.setBorderPainted(false);
-////            j.setFocusPainted(false);
-////            j.setFont(new Font("Raleway", Font.BOLD, 15));
-////            j.setBounds(0,0,500,5);
-////            body.add(j);e
-//        }
+        x.addActionListener((ActionListener) body);
+        s.close();
+        c.close();
     }
     catch(Exception exec){
-//        System.out.println(exec);
         System.out.println("End of table reached");
     }
     scroll = new JScrollPane(body);
@@ -93,7 +87,13 @@ admin(){
     //bottom layout
     bottom= new JPanel();
     bottom.setPreferredSize(new Dimension(100,100));
-    bottom.setLayout(new MigLayout("","[:70, grow, center][grow, left]",""));
+    bottom.setLayout(new MigLayout("fillx","[:70, grow, center][grow, left]",""));
+    qn = new JLabel("Type question number to be removed:");
+    qn.setFont(new Font("Raleway", Font.PLAIN, 15));
+    bottom.add(qn,"align right");
+    drop = new JTextField();
+    bottom.add(drop,"wmin 50, wmax 50, wrap");
+
     bottom.setBackground(Color.decode("#f4f4f4"));
     this.add(bottom, BorderLayout.SOUTH);
     clear = new jbtn("REMOVE",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
@@ -126,14 +126,40 @@ admin(){
     @Override
     public void actionPerformed(ActionEvent e) {
     if(e.getSource()==add)
-    {   add.disable();
+    {   this.dispose();
         admin_add add = new admin_add();
+
     }
 
     if(e.getSource()==lnk){
         this.dispose();
         Main m = new Main();
     }
+    if(e.getSource()==clear) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app", "root", "root");
+            Statement s = c.createStatement();
 
+            String query = "SELECT COUNT(*) FROM question;";
+            ResultSet rs = s.executeQuery(query);
+            rs.next();
+            int maxQuestion = rs.getInt(1);
+
+            query = "DELETE FROM question WHERE question_no=" + drop.getText() + ";";
+            s.executeUpdate(query);
+
+            query = "UPDATE question SET question_no=" + drop.getText() + " WHERE question_no=" + maxQuestion + " ;";
+            s.executeUpdate(query);
+
+            query = "ALTER TABLE question AUTO_INCREMENT=1;";
+            s.executeUpdate(query);
+        } catch (SQLException | ClassNotFoundException em) {
+            System.out.println(em);
+        }
+        JOptionPane.showMessageDialog(null,"Question has been deleted!!!","Success", JOptionPane.OK_OPTION);
+        this.dispose();
+        admin ad = new admin();
+    }
     }
 }

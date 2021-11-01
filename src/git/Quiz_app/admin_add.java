@@ -147,7 +147,15 @@ public class admin_add extends JFrame implements ActionListener {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
+                    question.setText("");
+                    an.setText("");
+                    opt1.setText("");
+                    opt2.setText("");
+                    opt3.setText("");
+                    opt4.setText("");
+                    JOptionPane.showMessageDialog(null,"Question has been added!!!","Successfull", JOptionPane.OK_OPTION);
+                    this.dispose();
+                    admin ad = new admin();
                     System.out.println( " Question added");
                 }
                 else if(e.getSource()==clear){
@@ -161,7 +169,7 @@ public class admin_add extends JFrame implements ActionListener {
 
                 if(e.getSource()==lnk){
                     this.dispose();
-
+                    admin ad = new admin();
                 }
     }
 
