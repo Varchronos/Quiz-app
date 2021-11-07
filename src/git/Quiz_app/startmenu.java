@@ -13,6 +13,7 @@ public class startmenu extends JFrame implements ActionListener {
    JPanel header,body,footer;
    JLabel head,h2,inst,inf;
    JButton starmit, next;
+   int questionpresented,count;
 
 startmenu(){}
 startmenu(String name,String reg){
@@ -110,11 +111,60 @@ startmenu(String name,String reg){
     if(e.getSource()==starmit){
         System.out.println("start button changed to submit button");
         starmit.setText("SUBMIT");
+	if(True){
+	    try {
+		    //connecting to dbms for fetching question
+		    Class.forName("com.mysql.cj.jdbc.Driver");
+		    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app","root","root");
+		    Statement s = c.createStatement();
+		    String query = "SELECT * FROM question;";
+		    ResultSet rs = s.executeQuery(query);
+		    // rs contain question and answer in result set format
+		    //
+		    // picking 5 question by using for loop
+		    //
+		    // magic function:
+		    //
+		    /*  //this whole down code should be in a function Let's call it magic
+			    rs.next();    
+			    String question = rs.getString(2);
+			    String opt1 = rs.getString(3);
+			    String opt2 = rs.getString(4);
+			    String opt3 = rs.getString(5);
+			    String opt4 = rs.getString(6);
+			    String correct_ans = rs.getString(7);
 
+			    //function or code to add question and update frame
+			    //
+			    //function or code that takes (question and opt) args and create a frame to display
+			    //
+			    //updating that information frame with the question and answer
+			    //
+			    //
+		    */
+		    s.close();
+		    c.close();
+	    }
+	    catch(Exception error){
+		    System.out.println("you fucking idiot programmer");
+	    }
     }
         if(e.getSource()==next)
         {
             System.out.println("next button pressed");
+	    //get that fucking selected column value in selected variable
+	    String selected;
+	    if(questionpresented<5){
+	    	//checking if selected answer is correct or not
+	    	if(selected==correct_ans){
+			    count++;	//counting the correct answer marked
+	    	}
+	    	//calling magic function again
+		questionpresented++;
+	    }
+	    else{
+		//call submit button automatically
+	    }
         }
     }
 
