@@ -3,7 +3,6 @@ package git.Quiz_app;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalIconFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,7 +67,7 @@ startmenu(String name,String reg){
     },"align left, grow, wrap");
 
 
-    footer  =  new JPanel();;
+    footer  =  new JPanel();
     footer.setPreferredSize(new Dimension(100,100));
     footer.setBackground(Color.decode("#f4f4f4"));
     this.add(footer,BorderLayout.SOUTH);

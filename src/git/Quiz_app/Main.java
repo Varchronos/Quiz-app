@@ -86,13 +86,30 @@ public class Main extends JFrame implements ActionListener {
             this.dispose();
             admin_login al = new admin_login();
         }
+        if(evt.getSource()==login)
+        {String r = reg.getText(), n = uname.getText();
+
+
+            startmenu s = new startmenu(uname.getText(),reg.getText());
+
+        }
     }
+
+
+
+
+
+    //main runner
+
     public static void main(String[] args) {
 //    	admin_add a = new admin_add();
         Main m = new Main();
 //        test t = new test(); //this is commented right now
 //    admin_login log = new admin_login();
 //        admin add = new admin();
+//        String name  = "dhruv";
+//        startmenu s = new startmenu(name);
+
     }
 
 }
