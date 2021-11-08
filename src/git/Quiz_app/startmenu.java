@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.sql.*;
 
 public class startmenu extends JFrame implements ActionListener {
    JPanel header,body,footer;
    JLabel head,h2,inst,inf;
    JButton starmit, next;
    int questionpresented,count;
+   JRadioButton o1, o2, o3, o4;
 
 startmenu(){}
 startmenu(String name,String reg){
@@ -75,6 +75,7 @@ startmenu(String name,String reg){
     footer  =  new JPanel();
     footer.setPreferredSize(new Dimension(100,100));
     footer.setBackground(Color.decode("#f4f4f4"));
+    footer.setLayout(new MigLayout("fillx","[grow, left]",""));
     this.add(footer,BorderLayout.SOUTH);
 
     //start submit button
@@ -85,17 +86,17 @@ startmenu(String name,String reg){
     starmit.setBackground(Color.decode("#b69f66"));
     starmit.setFont(new Font("Raleway", Font.BOLD, 15));
     starmit.addActionListener(this);
-    footer.add(starmit,"");
+    footer.add(starmit,"align center");
 
     //next button
-    next = new JButton("NEXT");
-    next.setBackground(Color.white);
-    next.setBorderPainted(false);
-    next.setBackground(Color.decode("#b69f66"));
-    next.setFocusPainted(false);
-    next.setFont(new Font("Raleway", Font.BOLD, 15));
-    next.addActionListener(this);
-    footer.add(next,"wrap");
+//    next = new JButton("NEXT");
+//    next.setBackground(Color.white);
+//    next.setBorderPainted(false);
+//    next.setBackground(Color.decode("#b69f66"));
+//    next.setFocusPainted(false);
+//    next.setFont(new Font("Raleway", Font.BOLD, 15));
+//    next.addActionListener(this);
+//    footer.add(next,"wrap");
 
 
 
@@ -106,27 +107,73 @@ startmenu(String name,String reg){
     this.setVisible(true);
 }
 
+private void qset(ResultSet rs){
+    try{
+        rs.next();
+        String question = rs.getString(2);
+        String opt1 = rs.getString(3);
+        String opt2 = rs.getString(4);
+        String opt3 = rs.getString(5);
+        String opt4 = rs.getString(6);
+        String correct_ans = rs.getString(7);
+        body = new JPanel();
+        body.setPreferredSize(new Dimension(700,400));
+        body.setBackground(Color.white);
+        this.add(body,BorderLayout.CENTER);
+        body.setLayout(new MigLayout("fillx","[grow, left]",""));
+        inst = new JLabel(question);
+        inst.setFont(new Font("Raleway",Font.BOLD,25));
+        body.add(inst, "align left,newline 30, wrap");
+        o1 = new JRadioButton(opt1);
+        o1.setBorderPainted(false);
+        o1.setBackground(Color.white);
+        o1.setFont(new Font("Raleway", Font.PLAIN, 15));
+        body.add(o1, "align left , wrap");
+
+        o2= new JRadioButton(opt2);
+        o2.setBorderPainted(false);
+        o2.setBackground(Color.white);
+        o2.setFont(new Font("Raleway", Font.PLAIN, 15));
+        body.add(o2, "align left , wrap");
+
+        o3 = new JRadioButton(opt3);
+        o3.setBorderPainted(false);
+        o3.setBackground(Color.white);
+        o3.setFont(new Font("Raleway", Font.PLAIN, 15));
+        body.add(o3, "align left , wrap");
+
+        o4 = new JRadioButton(opt4);
+        o4.setBorderPainted(false);
+        o4.setBackground(Color.white);
+        o4.setFont(new Font("Raleway", Font.PLAIN, 15));
+        body.add(o4, "align left , wrap");
+
+
+
+    }
+    catch(SQLException e){
+        e.printStackTrace();
+    }
+
+}
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-    if(e.getSource()==starmit){
-        System.out.println("start button changed to submit button");
-        starmit.setText("SUBMIT");
-	if(True){
-	    try {
-		    //connecting to dbms for fetching question
-		    Class.forName("com.mysql.cj.jdbc.Driver");
-		    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app","root","root");
-		    Statement s = c.createStatement();
-		    String query = "SELECT * FROM question;";
-		    ResultSet rs = s.executeQuery(query);
-		    // rs contain question and answer in result set format
-		    //
-		    // picking 5 question by using for loop
-		    //
-		    // magic function:
-		    //
+        try {
+            //connecting to dbms for fetching question
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app","root","root");
+            Statement s = c.createStatement();
+            String query = "SELECT * FROM question;";
+            ResultSet rs = s.executeQuery(query);
+            System.out.println("debug");
+            // rs contain question and answer in result set format
+            //
+            // magic function:
+            //
 		    /*  //this whole down code should be in a function Let's call it magic
-			    rs.next();    
+			    rs.next();
 			    String question = rs.getString(2);
 			    String opt1 = rs.getString(3);
 			    String opt2 = rs.getString(4);
@@ -142,31 +189,21 @@ startmenu(String name,String reg){
 			    //
 			    //
 		    */
-		    s.close();
-		    c.close();
-	    }
-	    catch(Exception error){
-		    System.out.println("you fucking idiot programmer");
-	    }
-    }
-        if(e.getSource()==next)
-        {
-            System.out.println("next button pressed");
-	    //get that fucking selected column value in selected variable
-	    String selected;
-	    if(questionpresented<5){
-	    	//checking if selected answer is correct or not
-	    	if(selected==correct_ans){
-			    count++;	//counting the correct answer marked
-	    	}
-	    	//calling magic function again
-		questionpresented++;
-	    }
-	    else{
-		//call submit button automatically
-	    }
+            if(e.getSource()==starmit){
+                System.out.println("start button changed to submit button");
+                starmit.setText("NEXT");
+                qset(rs);
+            }
+
+            s.close();
+            c.close();
         }
+        catch(Exception error){
+            System.out.println("you fucking idiot programmer");
+        }
+
     }
 
 
 }
+
