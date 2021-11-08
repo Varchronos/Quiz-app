@@ -3,6 +3,8 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/Desktop/miglayout-core-5.2.jar!/" />
       <root url="jar://$USER_HOME$/Desktop/miglayout-swing-5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/miglayout-core-5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lib/miglayout-swing-5.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -119,8 +119,8 @@ startmenu(String name,String reg){
             this.setLocationRelativeTo(null);
             this.setVisible(true);  
                 
-            s.close();
-            c.close();
+//            s.close();
+//            c.close();
         }
         catch(Exception error){
             System.out.println("you fucking idiot programmer");//hello cpp
@@ -172,8 +172,6 @@ private void qset(ResultSet rs){
         o4.setFont(new Font("Raleway", Font.PLAIN, 15));
         body.add(o4, "align left , wrap");
 
-
-
     }
     catch(SQLException e){
         e.printStackTrace();
@@ -196,6 +194,7 @@ private void qset(ResultSet rs){
             if(e.getSource()==starmit){
                 System.out.println("changing button to submit");
                 starmit.setText("SUBMIT");
+
             }
         }
     }
