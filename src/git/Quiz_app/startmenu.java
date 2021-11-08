@@ -6,15 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.*;
 
 public class startmenu extends JFrame implements ActionListener {
    JPanel header,body,footer;
    JLabel head,h2,inst, inf1,inf2, inf3;
    JButton starmit;
-   int count=0;
+   int count=0,marks=0;
    JRadioButton o1, o2, o3, o4;
+   ButtonGroup group;
    ResultSet rs;
+   user use;
 
 startmenu(){}
 startmenu(String name,String reg){
@@ -30,11 +34,11 @@ startmenu(String name,String reg){
             System.out.println("debug");
 
 
-            user use = new user();
+            use = new user();
             use.name = name;
             use.regID = reg;
 
-            setTitle("Strat Menu");
+            setTitle("Start Menu");
             this.setLayout(new BorderLayout());
             getContentPane().setBackground(Color.decode("#f4f4f4"));
             //header panel
@@ -136,7 +140,7 @@ startmenu(String name,String reg){
 
 private void qset(ResultSet rs){
     try{
-
+        group = new ButtonGroup();
         body.revalidate();
         body.repaint();
         rs.next();
@@ -157,58 +161,132 @@ private void qset(ResultSet rs){
         o1.setBorderPainted(false);
         o1.setBackground(Color.white);
         o1.setFont(new Font("Raleway", Font.PLAIN, 15));
-        body.add(o1, "align left , wrap");
+        group.add(o1);
+        body.add(o1, "align left, wrap");
+        o1.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent itemEvent) {
+                int state = itemEvent.getStateChange();
+                if(o1.getText().equalsIgnoreCase(correct_ans)){
+                    if(state == ItemEvent.SELECTED){
+                        marks+=1;
+                    }
+                    else if(state==ItemEvent.DESELECTED){
+                        marks-=1;
+                    }
+                }
+            }
+        });
+
 
         o2= new JRadioButton(opt2);
         o2.setBorderPainted(false);
         o2.setBackground(Color.white);
         o2.setFont(new Font("Raleway", Font.PLAIN, 15));
-        body.add(o2, "align left , wrap");
+        group.add(o2);
+        body.add(o2, "align left, wrap");
+        o2.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent itemEvent) {
+                int state = itemEvent.getStateChange();
+                if(o2.getText().equalsIgnoreCase(correct_ans)) {
+                    if (state == ItemEvent.SELECTED) {
+                        marks += 1;
+                    } else if (state == ItemEvent.DESELECTED) {
+                        marks -= 1;
+                    }
+                }
+            }
+        });
 
         o3 = new JRadioButton(opt3);
         o3.setBorderPainted(false);
         o3.setBackground(Color.white);
         o3.setFont(new Font("Raleway", Font.PLAIN, 15));
-        body.add(o3, "align left , wrap");
+        group.add(o3);
+        body.add(o3, "align left, wrap");
+        o3.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent itemEvent) {
+                int state = itemEvent.getStateChange();
+                if(o3.getText().equalsIgnoreCase(correct_ans)) {
+                    if (state == ItemEvent.SELECTED) {
+                        marks += 1;
+                    } else if (state == ItemEvent.DESELECTED) {
+                        marks -= 1;
+                    }
+                }
+            }
+        });
 
-        System.out.println("this is running"+ question);
+//        System.out.println("this is running"+ question);
 
         o4 = new JRadioButton(opt4);
         o4.setBorderPainted(false);
         o4.setBackground(Color.white);
         o4.setFont(new Font("Raleway", Font.PLAIN, 15));
-        body.add(o4, "align left , wrap");
+        group.add(o4);
+        body.add(o4, "align left, wrap");
+        o1.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent itemEvent) {
+                int state = itemEvent.getStateChange();
+                if(o4.getText().equalsIgnoreCase(correct_ans)){
+                    if(state == ItemEvent.SELECTED){
+                        marks+=1;
+                    }
+                    else if(state==ItemEvent.DESELECTED){
+                        marks-=1;
+                    }
+                }
+            }
+        });
+
+
 
     }
-    catch(SQLException e){
+    catch(SQLException e) {
         e.printStackTrace();
     }
-
 }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(count<5){
-            if(e.getSource()==starmit){
-                    System.out.println("start button changed to submit button");
-                    starmit.setText("NEXT");
-                    body.removeAll();
-                    body.revalidate();
-                    body.repaint();
-                    qset(rs);
+        if(e.getSource()==starmit) {
+            if (count < 3) {
+                System.out.println("start button changed to submit button");
+                starmit.setText("NEXT");
+                body.removeAll();
+                body.revalidate();
+                body.repaint();
+                qset(rs);
+                System.out.println(marks);
+                count++;
             }
-            count++;
-        }
-        else{
-            if(e.getSource()==starmit){
+            else{
                 System.out.println("changing button to submit");
                 starmit.setText("SUBMIT");
-
+                System.out.println(marks);
+                use.marks = marks;
+                try{
+                    //connecting to dbms for fetching question
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app","root","root");
+                    Statement s = c.createStatement();
+                    String query = "INSERT INTO users (id,name,userid,correctans) VALUES (DEFAULT,'"
+                            + use.name + "','"
+                            + use.regID + "',"
+                            + use.marks + ");";
+                    s.executeUpdate(query);
+                    JOptionPane.showMessageDialog(null,"You have successfully submitted the quiz!!!","Successfull", JOptionPane.INFORMATION_MESSAGE);
+                }catch (Exception en){
+                    System.out.println(en);
+                }
             }
+
         }
     }
-
 
 }
 
