@@ -199,7 +199,7 @@ private void qset(ResultSet rs){
             c.close();
         }
         catch(Exception error){
-            System.out.println("you fucking idiot programmer");
+            System.out.println("you fucking idiot programmer");//hello cpp
         }
 
     }
