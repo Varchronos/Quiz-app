@@ -10,8 +10,8 @@ import java.sql.*;
 
 public class startmenu extends JFrame implements ActionListener {
    JPanel header,body,footer;
-   JLabel head,h2,inst,inf;
-   JButton starmit, next;
+   JLabel head,h2,inst, inf1,inf2, inf3;
+   JButton starmit;
    int count=0;
    JRadioButton o1, o2, o3, o4;
    ResultSet rs;
@@ -61,28 +61,31 @@ startmenu(String name,String reg){
             inst.setFont(new Font("Raleway",Font.BOLD,25));
             body.add(inst,"align left,wrap");
 
-            inf = new JLabel("=> All questions are within syllabus"){
+            inf1 = new JLabel("=> All questions are within syllabus"){
                 @Override
                 public void setFont(Font font) {
                     font = new Font("Raleway",Font.PLAIN,15);
                     super.setFont(font);
                 }
             };
-            body.add(inf,"align left ,grow, wrap,newline 30px");
-            body.add(new JLabel("=> You wont be able to return back to previous question/s after answering them"){
+            body.add(inf1,"align left ,grow, wrap,newline 30px");
+            inf2 = new JLabel("=> You wont be able to return back to previous question/s after answering them"){
                 @Override
                 public void setFont(Font font) {
                     font = new Font("Raleway",Font.PLAIN,15);
                     super.setFont(font);
                 }
-            },"align left, grow , wrap");
-            body.add(new JLabel("=> All the best"){
+            };
+            body.add(inf2,"align left, grow , wrap");
+
+            inf3 = new JLabel("=> All the best"){
                 @Override
                 public void setFont(Font font) {
                     font = new Font("Raleway",Font.PLAIN,15);
                     super.setFont(font);
                 }
-            },"align left, grow, wrap");
+            };
+            body.add(inf3,"align left, grow, wrap");
 
             //footer panel, panel will have buttons only
             footer  =  new JPanel();
@@ -133,6 +136,9 @@ startmenu(String name,String reg){
 
 private void qset(ResultSet rs){
     try{
+
+        body.revalidate();
+        body.repaint();
         rs.next();
         String question = rs.getString(2);
         String opt1 = rs.getString(3);
@@ -140,7 +146,6 @@ private void qset(ResultSet rs){
         String opt3 = rs.getString(5);
         String opt4 = rs.getString(6);
         String correct_ans = rs.getString(7);
-        body = new JPanel();
         body.setPreferredSize(new Dimension(700,400));
         body.setBackground(Color.white);
         this.add(body,BorderLayout.CENTER);
@@ -166,6 +171,8 @@ private void qset(ResultSet rs){
         o3.setFont(new Font("Raleway", Font.PLAIN, 15));
         body.add(o3, "align left , wrap");
 
+        System.out.println("this is running"+ question);
+
         o4 = new JRadioButton(opt4);
         o4.setBorderPainted(false);
         o4.setBackground(Color.white);
@@ -186,6 +193,9 @@ private void qset(ResultSet rs){
             if(e.getSource()==starmit){
                     System.out.println("start button changed to submit button");
                     starmit.setText("NEXT");
+                    body.removeAll();
+                    body.revalidate();
+                    body.repaint();
                     qset(rs);
             }
             count++;
