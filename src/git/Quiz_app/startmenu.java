@@ -280,6 +280,8 @@ private void qset(ResultSet rs){
                             + use.marks + ");";
                     s.executeUpdate(query);
                     JOptionPane.showMessageDialog(null,"You have successfully submitted the quiz!!!","Successfull", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                    result_table r = new result_table();
                 }catch (Exception en){
                     System.out.println(en);
                 }

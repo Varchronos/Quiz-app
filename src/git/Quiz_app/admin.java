@@ -64,14 +64,14 @@ admin(){
         int i=1;
 
         while(rs.next()) {
-            x = new JToggleButton(i + ". " + rs.getString(2));
-            x.setBackground(Color.white);
-            x.setBorderPainted(false);
-            x.setFocusPainted(false);
-            x.setFont(new Font("Raleway", Font.BOLD, 15));
-            x.setBounds(0, 0, 500, 5);
-            body.add(x);
-            i++;
+//            x = new JToggleButton(i + ". " + rs.getString(2));
+//            x.setBackground(Color.white);
+//            x.setBorderPainted(false);
+//            x.setFocusPainted(false);
+//            x.setFont(new Font("Raleway", Font.BOLD, 15));
+//            x.setBounds(0, 0, 500, 5);
+//            body.add(x);
+//            i++;
         }
         x.addActionListener((ActionListener) body);
         s.close();
@@ -81,7 +81,7 @@ admin(){
         System.out.println("End of table reached");
     }
     scroll = new JScrollPane(body);
-    scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     this.add(scroll);
 

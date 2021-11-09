@@ -89,7 +89,7 @@ public class Main extends JFrame implements ActionListener {
         if(evt.getSource()==login)
         {String r = reg.getText(), n = uname.getText();
 
-
+            this.dispose();
             startmenu s = new startmenu(uname.getText(),reg.getText());
 
         }
@@ -103,8 +103,8 @@ public class Main extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
 //    	admin_add a = new admin_add();
-//        Main m = new Main();
-            result_table r =  new result_table();
+        Main m = new Main();
+//           result_table r =  new result_table();
 //        test t = new test();
 // this is commented right now
 //    admin_login log = new admin_login();
