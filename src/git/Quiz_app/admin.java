@@ -4,6 +4,8 @@ import git.Quiz_app.Util.jbtn;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +25,7 @@ jbtn clear, add;
 JButton lnk;
 JToggleButton x;
 JTextField drop;
+String columnName[]={"question_no","question"};
 
 
 admin(){
@@ -47,11 +50,26 @@ admin(){
 
 
 
-    body = new JPanel();
-    body.setPreferredSize(new Dimension(700,600));
-//    body.setBackground(Color.decode("#333"));
-    this.add(body,BorderLayout.CENTER);
-    body.setLayout(new GridLayout(0,1,0,0));
+//    body = new JPanel();
+//    body.setPreferredSize(new Dimension(700,600));
+////    body.setBackground(Color.decode("#333"));
+//    this.add(body,BorderLayout.CENTER);
+//    body.setLayout(new GridLayout(0,1,0,0));
+    DefaultTableModel model = new DefaultTableModel();
+    model.setColumnIdentifiers(columnName);
+    JTable table = new JTable();
+    table.setModel(model);
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+    table.setFillsViewportHeight(true);
+    table.setRowHeight(30);
+    table.setFocusable(false);
+    table.setRowSelectionAllowed(false);
+
+    table.setFont(new Font("Raleway",Font.BOLD,15));
+    DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);
+    renderer.setHorizontalAlignment( SwingConstants.CENTER );
+    String question;
+    int question_no;
 
     //SQL QUERY GOES HERE
     ResultSet rs;
@@ -61,9 +79,11 @@ admin(){
         Statement s = c.createStatement();
         String query = "SELECT * FROM question;";
         rs = s.executeQuery(query);
-        int i=1;
 
         while(rs.next()) {
+            question_no = rs.getInt("question_no");
+            question = rs.getString("question");
+            model.addRow(new Object[]{question_no,question});
 //            x = new JToggleButton(i + ". " + rs.getString(2));
 //            x.setBackground(Color.white);
 //            x.setBorderPainted(false);
@@ -73,14 +93,15 @@ admin(){
 //            body.add(x);
 //            i++;
         }
-        x.addActionListener((ActionListener) body);
         s.close();
         c.close();
     }
     catch(Exception exec){
         System.out.println("End of table reached");
     }
-    scroll = new JScrollPane(body);
+    this.add(table,BorderLayout.CENTER);
+    this.setVisible(true);
+    scroll = new JScrollPane(table);
     scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     this.add(scroll);
