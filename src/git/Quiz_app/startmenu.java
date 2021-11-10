@@ -7,10 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class startmenu extends JFrame implements ActionListener {
 
@@ -25,7 +23,6 @@ public class startmenu extends JFrame implements ActionListener {
    ResultSet rs;
    ArrayList<Integer> arr;
    user use;
-   private Timer timer;
 
 startmenu(){}
 startmenu(String name,String reg){
@@ -39,9 +36,7 @@ startmenu(String name,String reg){
             rs = s.executeQuery(query);
             rs.next();
             int max = rs.getInt(1);
-            System.out.println("debug");
-
-
+//            System.out.println("debug");
             use = new user();
             use.name = name;
             use.regID = reg;
@@ -122,20 +117,14 @@ startmenu(String name,String reg){
             this.setLocationRelativeTo(null);
             this.setVisible(true);
 
-
-
             //generating random numbers for quiz
             arr = randGen(max);
             System.out.println(max);
-                
-//            s.close();
-//            c.close();
         }
         catch(Exception error){
             System.out.println("you fucking idiot programmer");//hello cpp
     }
 }
-
 private void qset(ResultSet rs){
     try{
         group = new ButtonGroup();
@@ -161,17 +150,14 @@ private void qset(ResultSet rs){
         o1.setFont(new Font("Raleway", Font.PLAIN, 15));
         group.add(o1);
         body.add(o1, "align left, wrap");
-        o1.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent itemEvent) {
-                int state = itemEvent.getStateChange();
-                if(o1.getText().equalsIgnoreCase(correct_ans)){
-                    if(state == ItemEvent.SELECTED){
-                        marks+=1;
-                    }
-                    else if(state==ItemEvent.DESELECTED){
-                        marks-=1;
-                    }
+        o1.addItemListener(itemEvent -> {
+            int state = itemEvent.getStateChange();
+            if(o1.getText().equalsIgnoreCase(correct_ans)){
+                if(state == ItemEvent.SELECTED){
+                    marks+=1;
+                }
+                else if(state==ItemEvent.DESELECTED){
+                    marks-=1;
                 }
             }
         });
@@ -183,16 +169,13 @@ private void qset(ResultSet rs){
         o2.setFont(new Font("Raleway", Font.PLAIN, 15));
         group.add(o2);
         body.add(o2, "align left, wrap");
-        o2.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent itemEvent) {
-                int state = itemEvent.getStateChange();
-                if(o2.getText().equalsIgnoreCase(correct_ans)) {
-                    if (state == ItemEvent.SELECTED) {
-                        marks += 1;
-                    } else if (state == ItemEvent.DESELECTED) {
-                        marks -= 1;
-                    }
+        o2.addItemListener(itemEvent -> {
+            int state = itemEvent.getStateChange();
+            if(o2.getText().equalsIgnoreCase(correct_ans)) {
+                if (state == ItemEvent.SELECTED) {
+                    marks += 1;
+                } else if (state == ItemEvent.DESELECTED) {
+                    marks -= 1;
                 }
             }
         });
@@ -203,16 +186,13 @@ private void qset(ResultSet rs){
         o3.setFont(new Font("Raleway", Font.PLAIN, 15));
         group.add(o3);
         body.add(o3, "align left, wrap");
-        o3.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent itemEvent) {
-                int state = itemEvent.getStateChange();
-                if(o3.getText().equalsIgnoreCase(correct_ans)) {
-                    if (state == ItemEvent.SELECTED) {
-                        marks += 1;
-                    } else if (state == ItemEvent.DESELECTED) {
-                        marks -= 1;
-                    }
+        o3.addItemListener(itemEvent -> {
+            int state = itemEvent.getStateChange();
+            if(o3.getText().equalsIgnoreCase(correct_ans)) {
+                if (state == ItemEvent.SELECTED) {
+                    marks += 1;
+                } else if (state == ItemEvent.DESELECTED) {
+                    marks -= 1;
                 }
             }
         });
@@ -225,17 +205,14 @@ private void qset(ResultSet rs){
         o4.setFont(new Font("Raleway", Font.PLAIN, 15));
         group.add(o4);
         body.add(o4, "align left, wrap");
-        o1.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent itemEvent) {
-                int state = itemEvent.getStateChange();
-                if(o4.getText().equalsIgnoreCase(correct_ans)){
-                    if(state == ItemEvent.SELECTED){
-                        marks+=1;
-                    }
-                    else if(state==ItemEvent.DESELECTED){
-                        marks-=1;
-                    }
+        o1.addItemListener(itemEvent -> {
+            int state = itemEvent.getStateChange();
+            if(o4.getText().equalsIgnoreCase(correct_ans)){
+                if(state == ItemEvent.SELECTED){
+                    marks+=1;
+                }
+                else if(state==ItemEvent.DESELECTED){
+                    marks-=1;
                 }
             }
         });
@@ -275,7 +252,7 @@ private void qset(ResultSet rs){
                 try {
                     rs = s.executeQuery(query);
                 }catch (SQLException exec){
-                    System.out.println(exec);
+                    exec.printStackTrace();
                 }
                 body.removeAll();
                 body.revalidate();
@@ -305,7 +282,7 @@ private void qset(ResultSet rs){
                     this.dispose();
                     result_table r = new result_table();
                 }catch (Exception en){
-                    System.out.println(en);
+                    en.printStackTrace();
                 }
             }
 
