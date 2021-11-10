@@ -10,8 +10,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class startmenu extends JFrame implements ActionListener {
+
    JPanel header,body,footer;
    JLabel head,h2,inst, inf1,inf2, inf3;
    JButton starmit;
@@ -23,6 +25,7 @@ public class startmenu extends JFrame implements ActionListener {
    ResultSet rs;
    ArrayList<Integer> arr;
    user use;
+   private Timer timer;
 
 startmenu(){}
 startmenu(String name,String reg){
@@ -113,18 +116,6 @@ startmenu(String name,String reg){
             starmit.addActionListener(this);
             footer.add(starmit,"align center");
 
-            //next button
-        //    next = new JButton("NEXT");
-        //    next.setBackground(Color.white);
-        //    next.setBorderPainted(false);
-        //    next.setBackground(Color.decode("#b69f66"));
-        //    next.setFocusPainted(false);
-        //    next.setFont(new Font("Raleway", Font.BOLD, 15));
-        //    next.addActionListener(this);
-        //    footer.add(next,"wrap");
-
-
-
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setResizable(false);
             this.setSize(700,600);
@@ -143,7 +134,6 @@ startmenu(String name,String reg){
         catch(Exception error){
             System.out.println("you fucking idiot programmer");//hello cpp
     }
-
 }
 
 private void qset(ResultSet rs){
@@ -278,7 +268,7 @@ private void qset(ResultSet rs){
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==starmit) {
-            if (count < 3) {
+        if (count < 3) {
                 System.out.println("start button changed to submit button");
                 starmit.setText("NEXT");
                 String query = "SELECT * FROM question where question_no="+ arr.get(count) +";";
@@ -302,7 +292,7 @@ private void qset(ResultSet rs){
                 try{
                     //connecting to dbms for fetching question
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app","root","root");
+                    c = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com/sql6450129", "sql6450129", "iJ8zlh5CCx");
                     Statement s = c.createStatement();
                     String query = "INSERT INTO users (id,name,userid,correctans) VALUES (DEFAULT,'"
                             + use.name + "','"

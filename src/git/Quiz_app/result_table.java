@@ -29,7 +29,7 @@ public class result_table extends JFrame implements ActionListener {
         header= new JPanel();
         header.setPreferredSize(new Dimension(100,100));
         header.setLayout(new MigLayout("fillx","[grow, left]",""));
-        header.setBackground(Color.decode("#9A9483"));
+        header.setBackground(Color.decode("#F6E6CB"));
         this.add(header,BorderLayout.NORTH);
         // head on header panel
         head = new JLabel("Results",JLabel.CENTER);
@@ -51,7 +51,7 @@ public class result_table extends JFrame implements ActionListener {
         table.setFocusable(false);
         table.setRowSelectionAllowed(false);
 
-        table.setFont(new Font("Raleway",Font.BOLD,15));
+        table.setFont(new Font("Raleway",Font.PLAIN,15));
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);
         renderer.setHorizontalAlignment( SwingConstants.CENTER );
         int id;
@@ -88,18 +88,18 @@ public class result_table extends JFrame implements ActionListener {
         footer = new JPanel();
         footer.setPreferredSize(new Dimension(100,100));
         footer.setLayout(new MigLayout("fillx","[grow, left]",""));
-        footer.setBackground(Color.decode("#9A9483"));
+        footer.setBackground(Color.decode("#F6E6CB"));
         this.add(footer, BorderLayout.SOUTH);
 
         lnk = new JButton("Return to Login? Click here");
-        lnk.setFont(new Font("Raleway", Font.BOLD, 10));
+        lnk.setFont(new Font("Raleway", Font.BOLD, 16));
         lnk.setCursor(new Cursor(Cursor.HAND_CURSOR));
         lnk.setFocusPainted(false);
-        lnk.setForeground(Color.decode("#193498"));
-        lnk.setBackground(Color.decode("#f4f4f4"));
+        lnk.setForeground(Color.BLACK);
+        lnk.setBackground(Color.decode("#F6E6CB"));
         lnk.setBorderPainted(false);
         lnk.addActionListener(this);
-        footer.add(lnk,"span,align center,wrap");
+        footer.add(lnk,"push,align center,wrap");
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
