@@ -128,7 +128,7 @@ public class admin_add extends JFrame implements ActionListener {
                 if(e.getSource()==submit) {         //submit the data in dbms
                     try {
                         Class.forName("com.mysql.cj.jdbc.Driver");
-                        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app", "root", "root");
+                        Connection c = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com/sql6450129", "sql6450129", "iJ8zlh5CCx");
                         Statement s = c.createStatement();         //creating connection to dbms
 
                         //Query for adding questions

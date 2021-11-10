@@ -75,7 +75,7 @@ admin(){
     ResultSet rs;
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app", "root", "root");
+        Connection c = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com/sql6450129", "sql6450129", "iJ8zlh5CCx");
         Statement s = c.createStatement();
         String query = "SELECT * FROM question;";
         rs = s.executeQuery(query);
@@ -160,7 +160,7 @@ admin(){
     if(e.getSource()==clear) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app", "root", "root");
+            Connection c = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com/sql6450129", "sql6450129", "iJ8zlh5CCx");
             Statement s = c.createStatement();
 
             String query = "SELECT COUNT(*) FROM question;";

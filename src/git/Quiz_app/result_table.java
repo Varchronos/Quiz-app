@@ -62,7 +62,7 @@ public class result_table extends JFrame implements ActionListener {
         try{
             //connecting to dbms for fetching question
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app","root","root");
+            Connection c = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com/sql6450129", "sql6450129", "iJ8zlh5CCx");
             Statement st = c.createStatement();
             rs = st.executeQuery("SELECT * FROM users;");
             while (rs.next()){

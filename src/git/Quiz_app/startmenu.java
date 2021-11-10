@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class startmenu extends JFrame implements ActionListener {
    JPanel header,body,footer;
@@ -17,20 +18,24 @@ public class startmenu extends JFrame implements ActionListener {
    int count=0,marks=0;
    JRadioButton o1, o2, o3, o4;
    ButtonGroup group;
+   Connection c;
+   Statement s;
    ResultSet rs;
+   ArrayList<Integer> arr;
    user use;
 
 startmenu(){}
 startmenu(String name,String reg){
-
     //connection to mysql
     try {
             //connecting to dbms for fetching question
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost/quiz_app","root","root");
-            Statement s = c.createStatement();
-            String query = "SELECT * FROM question;";
+            c = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com/sql6450129", "sql6450129", "iJ8zlh5CCx");
+            s = c.createStatement();
+            String query = "SELECT count(*) FROM question;";
             rs = s.executeQuery(query);
+            rs.next();
+            int max = rs.getInt(1);
             System.out.println("debug");
 
 
@@ -124,7 +129,13 @@ startmenu(String name,String reg){
             this.setResizable(false);
             this.setSize(700,600);
             this.setLocationRelativeTo(null);
-            this.setVisible(true);  
+            this.setVisible(true);
+
+
+
+            //generating random numbers for quiz
+            arr = randGen(max);
+            System.out.println(max);
                 
 //            s.close();
 //            c.close();
@@ -132,9 +143,6 @@ startmenu(String name,String reg){
         catch(Exception error){
             System.out.println("you fucking idiot programmer");//hello cpp
     }
-
-
-    
 
 }
 
@@ -250,6 +258,22 @@ private void qset(ResultSet rs){
     }
 }
 
+    public static ArrayList<Integer> randGen(int max){
+        ArrayList<Integer> arr = new ArrayList<>();
+        int min = 1;
+        int m = max;
+        while(arr.toArray().length!=max){
+            for(int i = 1; i<=max;i++) {
+                int b = (int) (Math.random() * (m - min + 1) + min);
+                if (!arr.contains(b)) {
+                    arr.add(b);
+                }
+            }
+        }
+//        System.out.println(arr);
+        return arr;
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -257,6 +281,12 @@ private void qset(ResultSet rs){
             if (count < 3) {
                 System.out.println("start button changed to submit button");
                 starmit.setText("NEXT");
+                String query = "SELECT * FROM question where question_no="+ arr.get(count) +";";
+                try {
+                    rs = s.executeQuery(query);
+                }catch (SQLException exec){
+                    System.out.println(exec);
+                }
                 body.removeAll();
                 body.revalidate();
                 body.repaint();
@@ -279,6 +309,8 @@ private void qset(ResultSet rs){
                             + use.regID + "',"
                             + use.marks + ");";
                     s.executeUpdate(query);
+                    s.close();
+                    c.close();
                     JOptionPane.showMessageDialog(null,"You have successfully submitted the quiz!!!","Successfull", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                     result_table r = new result_table();
