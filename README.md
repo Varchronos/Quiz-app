@@ -39,8 +39,13 @@ Download the executable artifact here directly if you want to (dont worry there'
 
 ## Screenshots
 
+### Main panel
 ![main panel](Screenshots/main.png)
+
+### Admin panel
 ![admin panel](Screenshots/admin.png)
+
+### Quiz panel
 ![quiz panel](Screenshots/quiz.png)
 
 ## Authors
