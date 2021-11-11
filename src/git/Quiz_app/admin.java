@@ -11,12 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-
-
 public class admin extends JFrame implements ActionListener {
-
-
-
 
 JLabel head,h2,qn;
 JPanel header,bottom;
@@ -25,12 +20,15 @@ jbtn clear, add;
 JButton lnk;
 JTextField drop;
 String[] columnName={"question_no","question"};
-
-
+    ImageIcon icon;
 admin(){
     setTitle("admin panel");
     this.setLayout(new BorderLayout());
     getContentPane().setBackground(Color.decode("#f4f4f4"));
+
+    //adding icon to the frame
+    icon = new ImageIcon("Screenshots/car.png");
+    this.setIconImage(icon.getImage());
 
     //header panel
     header = new JPanel();

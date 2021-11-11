@@ -16,10 +16,15 @@ public class admin_login extends JFrame implements ActionListener {
     JPasswordField pass;
     jbtn login;
     JButton lnk;
+    ImageIcon icon;
     admin_login(){
         setTitle("Admin Login");
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));
+
+        //adding icon to the frame
+        icon = new ImageIcon("Screenshots/car.png");
+        this.setIconImage(icon.getImage());
 
         //header panel
         header = new JPanel();

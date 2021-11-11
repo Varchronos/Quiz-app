@@ -21,11 +21,16 @@ public class admin_add extends JFrame implements ActionListener {
     JTextField opt4;
     jbtn submit,clear;
     JButton lnk ;
+    ImageIcon icon;
 
     admin_add(){
         setTitle("Admin add questions");
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));
+
+        //adding icon to the frame
+        icon = new ImageIcon("Screenshots/car.png");
+        this.setIconImage(icon.getImage());
 
         //header panel
         header = new JPanel();

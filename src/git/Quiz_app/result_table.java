@@ -17,11 +17,16 @@ public class result_table extends JFrame implements ActionListener {
     JScrollPane scroll;
     String[] columnName = {"Id","RegID","Name","Scores","Time Taken"};
     ResultSet rs;
+    ImageIcon icon;
 
     result_table(){
         setTitle("Result");
         getContentPane().setBackground(Color.decode("#f4f4f4"));
         this.setLayout(new BorderLayout());
+
+        //adding icon to the frame
+        icon = new ImageIcon("Screenshots/car.png");
+        this.setIconImage(icon.getImage());
 
         //header panel
         header= new JPanel();

@@ -18,10 +18,14 @@ public class Main extends JFrame implements ActionListener {
     JTextField uname, reg;
     jbtn login;
     JButton lnk;
-
+    ImageIcon icon;
     Main(){
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));
+
+        //adding icon to the frame
+        icon = new ImageIcon("Screenshots/car.png");
+        this.setIconImage(icon.getImage());
 
         //header panel
         header = new JPanel();
@@ -98,6 +102,7 @@ public class Main extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         Main m = new Main();
+        System.out.println("\n\nPresent Project Directory : "+ System.getProperty("user.dir"));
     }
 
 }

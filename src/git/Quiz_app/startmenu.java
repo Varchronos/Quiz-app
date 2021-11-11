@@ -24,6 +24,7 @@ public class startmenu extends JFrame implements ActionListener {
    ArrayList<Integer> arr;
    user use;
     String time;
+    ImageIcon icon;
     JLabel samay = new JLabel("Time: 00:00");
     Runnable r1 = new Runnable() {
         @Override
@@ -52,6 +53,10 @@ public class startmenu extends JFrame implements ActionListener {
 
 startmenu(){}
 startmenu(String name,String reg){
+    //adding icon to the frame
+    icon = new ImageIcon("Screenshots/car.png");
+    this.setIconImage(icon.getImage());
+
     //connection to mysql
     try {
             //connecting to dbms for fetching question
