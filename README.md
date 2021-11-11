@@ -20,7 +20,7 @@ git clone https://github.com/r3z3l/Quiz-app.git
  
 
 ## Demo
-1. Highly recommend to open this project on Intellij Idea
+1. Highly recommend opening this project on Intellij Idea
 2. Make sure MySQL is downloaded in your system with J/Connector.
 3. connect to MySQL server, create a Database namend 'quiz-app'. Source the quiz_app.sql file into the Database.
 
@@ -28,8 +28,8 @@ git clone https://github.com/r3z3l/Quiz-app.git
     source <location of quiz_app.sql file>;
      ```
 4. After opening project on Intellij Idea, include all external jar libraries present inside Lib folder.
-5. Run the Main.java file.
-Have Fun
+5. Run the Main.java file. 
+6. Have Fun
 
 
 ## Screenshots
