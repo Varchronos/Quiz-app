@@ -23,6 +23,32 @@ public class startmenu extends JFrame implements ActionListener {
    ResultSet rs;
    ArrayList<Integer> arr;
    user use;
+    String time;
+    JLabel samay = new JLabel("Time: 00:00");
+    Runnable r1 = new Runnable() {
+        @Override
+        public void run() {
+            Timer tm = new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    passedtime+=1000;
+                    min = (passedtime/60000)%60;
+                    sec = (passedtime/1000)%60;
+                    secs = String.format("%02d", sec);
+                    mins = String.format("%02d", min);
+                    samay.setText("Time: "+mins+":"+secs);
+                    time=mins+" mins " +secs+" secs ";
+                }
+            });
+            tm.start();
+        }
+    };
+    Thread t1 = new Thread(r1);
+    int passedtime = 0;
+    int min = 0;
+    int sec = 0;
+    String secs = String.format("%02d", sec);
+    String mins = String.format("%02d", min);
 
 startmenu(){}
 startmenu(String name,String reg){
@@ -122,7 +148,7 @@ startmenu(String name,String reg){
             System.out.println(max);
         }
         catch(Exception error){
-            System.out.println("you fucking idiot programmer");//hello cpp
+            System.out.println("System Requirements not fulfilled!\nAborting...");//hello cpp
     }
 }
 private void qset(ResultSet rs){
@@ -131,6 +157,7 @@ private void qset(ResultSet rs){
         body.revalidate();
         body.repaint();
         rs.next();
+        samay.setFont(new Font("Raleway", Font.BOLD, 18));
         String question = rs.getString(2);
         String opt1 = rs.getString(3);
         String opt2 = rs.getString(4);
@@ -141,6 +168,7 @@ private void qset(ResultSet rs){
         body.setBackground(Color.white);
         this.add(body,BorderLayout.CENTER);
         body.setLayout(new MigLayout("fillx","[grow, left]",""));
+        body.add(samay, "align right, wrap");
         inst = new JLabel(question);
         inst.setFont(new Font("Raleway",Font.BOLD,25));
         body.add(inst, "align left,newline 30, wrap");
@@ -245,7 +273,11 @@ private void qset(ResultSet rs){
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==starmit) {
-        if (count < 3) {
+            if(count ==0) {
+                t1.start();
+                System.out.println("Timer started");
+            }
+            if (count < 3) {
                 System.out.println("start button changed to submit button");
                 starmit.setText("NEXT");
                 String query = "SELECT * FROM question where question_no="+ arr.get(count) +";";
@@ -257,6 +289,7 @@ private void qset(ResultSet rs){
                 body.removeAll();
                 body.revalidate();
                 body.repaint();
+                body.add(samay, BorderLayout.SOUTH);
                 qset(rs);
                 System.out.println(marks);
                 count++;
@@ -266,6 +299,8 @@ private void qset(ResultSet rs){
                 starmit.setText("SUBMIT");
                 System.out.println(marks);
                 use.marks = marks;
+                t1.stop();
+                System.out.println(time);
                 try{
                     //connecting to dbms for fetching question
                     Class.forName("com.mysql.cj.jdbc.Driver");
