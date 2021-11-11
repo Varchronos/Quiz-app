@@ -48,6 +48,9 @@ Download the executable artifact here directly if you want to (dont worry there'
 ### Quiz panel
 ![quiz panel](Screenshots/quiz.png)
 
+### Result panel
+![result panel](Screenshots/result.png)
+
 ## Authors
 
 - [@Varchronos](https://github.com/Varchronos)
