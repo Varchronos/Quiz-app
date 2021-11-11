@@ -34,7 +34,9 @@ Have Fun
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![main panel](Screenshots/main.png)
+![admin panel](Screenshots/admin.png)
+![quiz panel](Screenshots/quiz.png)
 
 ## Authors
 
