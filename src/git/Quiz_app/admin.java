@@ -51,7 +51,9 @@ admin(){
     model.setColumnIdentifiers(columnName);
     JTable table = new JTable();
     table.setModel(model);
-    table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+    table.getColumnModel().getColumn(0).setMaxWidth(100);
+    table.getColumnModel().getColumn(0).setMinWidth(100);
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     table.setFillsViewportHeight(true);
     table.setRowHeight(30);
     table.setFocusable(false);
@@ -59,6 +61,7 @@ admin(){
 
     table.setFont(new Font("Raleway",Font.BOLD,15));
     DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);
+
     renderer.setHorizontalAlignment( SwingConstants.CENTER );
     String question;
     int question_no;

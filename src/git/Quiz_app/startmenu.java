@@ -276,7 +276,7 @@ private void qset(ResultSet rs){
                 t1.start();
                 System.out.println("Timer started");
             }
-            if (count < 3) {
+            if (count < 5) {
                 System.out.println("start button changed to submit button");
                 starmit.setText("NEXT");
                 String query = "SELECT * FROM question where question_no="+ arr.get(count) +";";
@@ -292,10 +292,15 @@ private void qset(ResultSet rs){
                 qset(rs);
                 System.out.println(marks);
                 count++;
+
+                //changing to submit btn at last question
+                if(count ==5)
+                {starmit.setText("SUBMIT");
+                System.out.println("changing button to submit");}
             }
             else{
-                System.out.println("changing button to submit");
-                starmit.setText("SUBMIT");
+
+
                 System.out.println(marks);
                 use.marks = marks;
                 t1.stop();
