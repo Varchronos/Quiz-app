@@ -23,8 +23,7 @@ External dependencies like MigLayout and jdbc jar files are present in the Lib f
 ## Demo
 1. Highly recommend to open this project on Intellij Idea
 2. Make sure MySQL is downloaded in your system with J/Connector.
-## Local MySQL connection
-3. connect to your MySQL localhost server, create a Database named 'quiz-app'. Source the quiz_app.sql file into the Database.
+3. connect to your MySQL localhost server (or host one online), create a Database named 'quiz-app'. Source the quiz_app.sql file into the Database.
 
  ```bash
  source <location of quiz_app.sql file>;
