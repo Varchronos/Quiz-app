@@ -17,19 +17,25 @@ clone the repository
 ```bash
 git clone https://github.com/r3z3l/Quiz-app.git
 ```
+External dependencies like MigLayout and jdbc jar files are present in the Lib folder, check for them just in case.
  
 
 ## Demo
 1. Highly recommend to open this project on Intellij Idea
 2. Make sure MySQL is downloaded in your system with J/Connector.
-3. connect to MySQL server, create a Database namend 'quiz-app'. Source the quiz_app.sql file into the Database.
+## Local MySQL connection
+3. connect to your MySQL localhost server, create a Database named 'quiz-app'. Source the quiz_app.sql file into the Database.
 
  ```bash
  source <location of quiz_app.sql file>;
  ```
-4. After opening project on Intellij Idea, include all external jar libraries present inside Lib folder.
-5. Run the Main.java file.
-Have Fun
+4. After opening project on Intellij Idea, make sure all external jar files are present. Run the main class.
+
+## Download
+
+Download the executable artifact here directly if you want to (dont worry there's no virus)
+- [here](https://github.com/r3z3l/Quiz-app/raw/main/classes/artifacts/Executable_jar/Quiz-app.jar)
+
 
 
 ## Screenshots
