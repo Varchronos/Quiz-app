@@ -69,7 +69,6 @@ public class admin_login extends JFrame implements ActionListener {
         body.add(lnk,"span,align center,wrap");
 
 
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setSize(500,300);

@@ -70,6 +70,7 @@ startmenu(String name,String reg){
             setTitle("Start Menu");
             this.setLayout(new BorderLayout());
             getContentPane().setBackground(Color.decode("#f4f4f4"));
+
             //header panel
             header = new JPanel();
             header.setPreferredSize(new Dimension(100,100));
@@ -147,8 +148,9 @@ startmenu(String name,String reg){
             arr = randGen(max);
             System.out.println(max);
         }
-        catch(Exception error){
+        catch(SQLException | ClassNotFoundException error){
             System.out.println("System Requirements not fulfilled!\nAborting...");//hello cpp
+            error.printStackTrace();
     }
 }
 private void qset(ResultSet rs){
@@ -169,9 +171,11 @@ private void qset(ResultSet rs){
         this.add(body,BorderLayout.CENTER);
         body.setLayout(new MigLayout("fillx","[grow, left]",""));
         body.add(samay, "align right, wrap");
+
         inst = new JLabel(question);
         inst.setFont(new Font("Raleway",Font.BOLD,25));
         body.add(inst, "align left,newline 30, wrap");
+
         o1 = new JRadioButton(opt1);
         o1.setBorderPainted(false);
         o1.setBackground(Color.white);
@@ -189,7 +193,6 @@ private void qset(ResultSet rs){
                 }
             }
         });
-
 
         o2= new JRadioButton(opt2);
         o2.setBorderPainted(false);
@@ -225,8 +228,6 @@ private void qset(ResultSet rs){
             }
         });
 
-//        System.out.println("this is running"+ question);
-
         o4 = new JRadioButton(opt4);
         o4.setBorderPainted(false);
         o4.setBackground(Color.white);
@@ -244,15 +245,13 @@ private void qset(ResultSet rs){
                 }
             }
         });
-
-
-
     }
     catch(SQLException e) {
         e.printStackTrace();
     }
 }
 
+    //random array generator
     public static ArrayList<Integer> randGen(int max){
         ArrayList<Integer> arr = new ArrayList<>();
         int min = 1;
@@ -301,22 +300,25 @@ private void qset(ResultSet rs){
                 use.marks = marks;
                 t1.stop();
                 System.out.println(time);
+                use.time = time;
                 try{
+
                     //connecting to dbms for fetching question
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     c = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com/sql6450129", "sql6450129", "iJ8zlh5CCx");
                     Statement s = c.createStatement();
-                    String query = "INSERT INTO users (id,name,userid,correctans) VALUES (DEFAULT,'"
+                    String query = "INSERT INTO users (id,name,userid,correctans,time) VALUES (DEFAULT,'"
                             + use.name + "','"
                             + use.regID + "',"
-                            + use.marks + ");";
+                            + use.marks + ",'"
+                            + use.time + "');";
                     s.executeUpdate(query);
                     s.close();
                     c.close();
                     JOptionPane.showMessageDialog(null,"You have successfully submitted the quiz!!!","Successfull", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                     result_table r = new result_table();
-                }catch (Exception en){
+                }catch (SQLException | ClassNotFoundException en){
                     en.printStackTrace();
                 }
             }

@@ -19,13 +19,12 @@ public class admin extends JFrame implements ActionListener {
 
 
 JLabel head,h2,qn;
-JPanel header,bottom,body;
+JPanel header,bottom;
 JScrollPane scroll;
 jbtn clear, add;
 JButton lnk;
-JToggleButton x;
 JTextField drop;
-String columnName[]={"question_no","question"};
+String[] columnName={"question_no","question"};
 
 
 admin(){
@@ -47,14 +46,7 @@ admin(){
     h2.setFont(new Font("Osward",Font.PLAIN,15));
     header.add(h2,"align center");
 
-
-
-
-//    body = new JPanel();
-//    body.setPreferredSize(new Dimension(700,600));
-////    body.setBackground(Color.decode("#333"));
-//    this.add(body,BorderLayout.CENTER);
-//    body.setLayout(new GridLayout(0,1,0,0));
+    //Table created for displaying questions
     DefaultTableModel model = new DefaultTableModel();
     model.setColumnIdentifiers(columnName);
     JTable table = new JTable();
@@ -84,14 +76,6 @@ admin(){
             question_no = rs.getInt("question_no");
             question = rs.getString("question");
             model.addRow(new Object[]{question_no,question});
-//            x = new JToggleButton(i + ". " + rs.getString(2));
-//            x.setBackground(Color.white);
-//            x.setBorderPainted(false);
-//            x.setFocusPainted(false);
-//            x.setFont(new Font("Raleway", Font.BOLD, 15));
-//            x.setBounds(0, 0, 500, 5);
-//            body.add(x);
-//            i++;
         }
         s.close();
         c.close();
@@ -135,9 +119,6 @@ admin(){
     lnk.addActionListener(this);
     bottom.add(lnk,"span,align center,wrap");
 
-
-
-
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setResizable(false);
     this.setSize(700,600);
@@ -177,7 +158,7 @@ admin(){
             query = "ALTER TABLE question AUTO_INCREMENT=1;";
             s.executeUpdate(query);
         } catch (SQLException | ClassNotFoundException em) {
-            System.out.println(em);
+            em.printStackTrace();
         }
         JOptionPane.showMessageDialog(null,"Question has been deleted!!!","Success", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();

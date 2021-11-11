@@ -88,9 +88,6 @@ public class admin_add extends JFrame implements ActionListener {
         body.add(opt4,"wmin 230, wmax 230,align left,wrap 20px");
 
 
-
-
-
         //submit button
         submit = new jbtn("ADD",Color.decode("#9A9483"), Color.decode("#C7BEA2"));
         submit.setForeground(Color.decode("#000000"));

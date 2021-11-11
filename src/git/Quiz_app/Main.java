@@ -9,8 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 
 public class Main extends JFrame implements ActionListener {
@@ -89,46 +87,17 @@ public class Main extends JFrame implements ActionListener {
             admin_login al = new admin_login();
         }
         if(evt.getSource()==login)
-        {String r = reg.getText(), n = uname.getText();
-
+        {
             this.dispose();
             startmenu s = new startmenu(uname.getText(),reg.getText());
 
         }
     }
 
-
-    public static ArrayList<Integer> randGen(int max){
-        ArrayList<Integer> arr = new ArrayList<>();
-            int min = 1;
-            int m = max;
-            while(arr.toArray().length!=max){
-                 for(int i = 1; i<=max;i++) {
-                    int b = (int) (Math.random() * (m - min + 1) + min);
-                    if (!arr.contains(b)) {
-                        arr.add(b);
-                    }
-                }
-            }
-//        System.out.println(arr);
-    return arr;
-    }
-
-
     //main runner
 
     public static void main(String[] args) {
-//    	admin_add a = new admin_add();
         Main m = new Main();
-//           result_table r =  new result_table();
-
-// this is commented right now
-//    admin_login log = new admin_login();
-//        admin add = new admin();
-//        String name  = "dhruv";
-//        startmenu s = new startmenu(name);
-        //ArrayList<Integer> arr = randGen(10);
-        //System.out.println(arr);
     }
 
 }
