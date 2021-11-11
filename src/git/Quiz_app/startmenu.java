@@ -90,7 +90,7 @@ startmenu(String name,String reg){
             body.setPreferredSize(new Dimension(700,400));
             body.setBackground(Color.white);
             this.add(body, BorderLayout.CENTER);
-            body.setLayout(new MigLayout(" ","[:100, grow, center][grow, left]",""));
+            body.setLayout(new MigLayout("fillx","[:100,grow, center][grow, left]",""));
             inst = new JLabel("Instructions");
             inst.setFont(new Font("Raleway",Font.BOLD,25));
             body.add(inst,"align left,wrap");
@@ -170,11 +170,11 @@ private void qset(ResultSet rs){
         body.setBackground(Color.white);
         this.add(body,BorderLayout.CENTER);
         body.setLayout(new MigLayout("fillx","[grow, left]",""));
-        body.add(samay, "align right, wrap");
+        body.add(samay, "align center, wrap, newline 20");
 
         inst = new JLabel(question);
         inst.setFont(new Font("Raleway",Font.BOLD,25));
-        body.add(inst, "align left,newline 30, wrap");
+        body.add(inst, "align left,span 2, wrap, wmax 700px,newline 30");
 
         o1 = new JRadioButton(opt1);
         o1.setBorderPainted(false);

@@ -47,7 +47,7 @@ public class Main extends JFrame implements ActionListener {
         uname.setFont(new Font("Arial", Font.PLAIN, 20));
         body.add(username,"align right");
         body.add(uname,"wmin 230,wrap");
-        regID = new JLabel("ID:");
+        regID = new JLabel("Roll-no:");
         regID.setFont(new Font("Raleway", Font.BOLD, 25));
         reg = new JTextField();
         reg.setFont(new Font("Arial", Font.PLAIN, 20));
