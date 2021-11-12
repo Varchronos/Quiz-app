@@ -11,13 +11,13 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class result_table extends JFrame implements ActionListener {
-    JPanel header, footer;
-    JLabel head;
-    JButton lnk;
-    JScrollPane scroll;
-    String[] columnName = {"Id","RegID","Name","Scores","Time Taken"};
-    ResultSet rs;
-    ImageIcon icon;
+    private JPanel header, footer;
+    private JLabel head;
+    private JButton lnk;
+    private JScrollPane scroll;
+    private String[] columnName = {"Id","RegID","Name","Scores","Time Taken"};
+    private ResultSet rs;
+    private ImageIcon icon;
 
     result_table(){
         setTitle("Result");

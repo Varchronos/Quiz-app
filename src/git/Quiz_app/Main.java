@@ -12,13 +12,13 @@ import java.util.ArrayList;
 
 
 public class Main extends JFrame implements ActionListener {
-    JPanel header;
-    JPanel body;
-    JLabel top,username,regID;
-    JTextField uname, reg;
-    jbtn login;
-    JButton lnk;
-    ImageIcon icon;
+    private JPanel header;
+    private JPanel body;
+    private JLabel top,username,regID;
+    private JTextField uname, reg;
+    private jbtn login;
+    private JButton lnk;
+    private ImageIcon icon;
     Main(){
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));

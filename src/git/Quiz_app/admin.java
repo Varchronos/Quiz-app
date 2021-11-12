@@ -13,13 +13,13 @@ import java.sql.*;
 
 public class admin extends JFrame implements ActionListener {
 
-JLabel head,h2,qn;
-JPanel header,bottom;
-JScrollPane scroll;
-jbtn clear, add;
-JButton lnk;
-JTextField drop;
-String[] columnName={"question_no","question"};
+    private JLabel head,h2,qn;
+    private JPanel header,bottom;
+    private JScrollPane scroll;
+    private jbtn clear, add;
+    private JButton lnk;
+    private JTextField drop;
+    private String[] columnName={"question_no","question"};
     ImageIcon icon;
 admin(){
     setTitle("admin panel");

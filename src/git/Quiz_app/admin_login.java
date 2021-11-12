@@ -9,14 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class admin_login extends JFrame implements ActionListener {
-    JPanel header;
-    JPanel body;
-    JLabel top,username, password;
-    JTextField uname;
-    JPasswordField pass;
+    private JPanel header;
+    private JPanel body;
+    private JLabel top,username, password;
+    private JTextField uname;
+    private JPasswordField pass;
     jbtn login;
-    JButton lnk;
-    ImageIcon icon;
+    private JButton lnk;
+    private ImageIcon icon;
     admin_login(){
         setTitle("Admin Login");
         this.setLayout(new BorderLayout());

@@ -12,12 +12,12 @@ import java.util.ArrayList;
 
 public class startmenu extends JFrame implements ActionListener {
 
-   JPanel header,body,footer;
-   JLabel head,h2,inst, inf1,inf2, inf3;
-   JButton starmit;
+    private JPanel header,body,footer;
+    private JLabel head,h2,inst, inf1,inf2, inf3;
+    private JButton starmit;
    int count=0,marks=0;
-   JRadioButton o1, o2, o3, o4;
-   ButtonGroup group;
+    private JRadioButton o1, o2, o3, o4;
+    private ButtonGroup group;
    Connection c;
    Statement s;
    ResultSet rs;

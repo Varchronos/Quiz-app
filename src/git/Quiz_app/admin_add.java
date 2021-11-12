@@ -14,14 +14,14 @@ public class admin_add extends JFrame implements ActionListener {
     JPanel body;
     JLabel head, Q,o1, o2, o3, o4,ans;
 
-    JTextField question,an;
-    JTextField opt1;
-    JTextField opt2;
-    JTextField opt3;
-    JTextField opt4;
-    jbtn submit,clear;
-    JButton lnk ;
-    ImageIcon icon;
+    private JTextField question,an;
+    private  JTextField opt1;
+    private  JTextField opt2;
+    private JTextField opt3;
+    private JTextField opt4;
+    private  jbtn submit,clear;
+    private JButton lnk ;
+    private ImageIcon icon;
 
     admin_add(){
         setTitle("Admin add questions");
