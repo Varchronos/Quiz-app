@@ -9,6 +9,7 @@ Based on Java.
 - User registeration (activity saved on database, MySQL)
 - Quiz generates with random questions. 
 - Minimal design (I guess).
+- Every users quiz time is recorded.
 
 
 ## Installation
