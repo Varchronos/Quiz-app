@@ -58,3 +58,4 @@ Download the executable artifact here directly if you want to (dont worry there'
 - [@r3z3l](https://github.com/r3z3l)
 - [@rohan17012001](https://github.com/rohan17012001)
 - [@Ashu-161120](https://github.com/Ashu-161120)
+- [@Sudhir-Raj](https://github.com/Sudhir-Raj)
