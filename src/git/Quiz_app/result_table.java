@@ -5,25 +5,28 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class result_table extends JFrame implements ActionListener {
-    JPanel header, body, footer;
-    JLabel head;
-    JButton lnk;
-    JScrollPane scroll;
-    JTableHeader thead;
-    String columnName[] = {"id","regID","Name","scores"};
-    ResultSet rs;
+    private JPanel header, footer;
+    private JLabel head;
+    private JButton lnk;
+    private JScrollPane scroll;
+    private String[] columnName = {"Id","RegID","Name","Scores","Time Taken"};
+    private ResultSet rs;
+    private ImageIcon icon;
 
     result_table(){
         setTitle("Result");
         getContentPane().setBackground(Color.decode("#f4f4f4"));
         this.setLayout(new BorderLayout());
+
+        //adding icon to the frame
+        icon = new ImageIcon("Screenshots/car.png");
+        this.setIconImage(icon.getImage());
 
         //header panel
         header= new JPanel();
@@ -36,11 +39,7 @@ public class result_table extends JFrame implements ActionListener {
         head.setFont(new Font("Osward", Font.BOLD, 38));
         header.add(head,"push,grow,wrap");
 
-//        body = new JPanel();
-//        body.setPreferredSize(new Dimension(700,900));
-//        body.setBackground(Color.decode("#f4f4f4"));
-//        this.add(body, BorderLayout.CENTER);
-
+        //Table added for displaying results
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columnName);
         JTable table = new JTable();
@@ -54,10 +53,8 @@ public class result_table extends JFrame implements ActionListener {
         table.setFont(new Font("Raleway",Font.PLAIN,15));
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);
         renderer.setHorizontalAlignment( SwingConstants.CENTER );
-        int id;
-        String regID="";
-        String name="";
-        int scores;
+        int id,scores;
+        String regID,name,time;
 
         try{
             //connecting to dbms for fetching question
@@ -70,13 +67,14 @@ public class result_table extends JFrame implements ActionListener {
                 regID = rs.getString("userid");
                 name = rs.getString("name");
                 scores = rs.getInt("correctans");
-                model.addRow(new Object[]{id,regID,name,scores});
+                time = rs.getString("time");
+                model.addRow(new Object[]{id,regID,name,scores,time});
                 System.out.println(id);
             }
 
         }
-        catch (Exception e){
-            System.out.println(e);
+        catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
         }
         this.add(table,BorderLayout.CENTER);
         this.setVisible(true);

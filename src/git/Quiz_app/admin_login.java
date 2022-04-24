@@ -9,17 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class admin_login extends JFrame implements ActionListener {
-    JPanel header;
-    JPanel body;
-    JLabel top,username, password;
-    JTextField uname;
-    JPasswordField pass;
+    private JPanel header;
+    private JPanel body;
+    private JLabel top,username, password;
+    private JTextField uname;
+    private JPasswordField pass;
     jbtn login;
-    JButton lnk;
+    private JButton lnk;
+    private ImageIcon icon;
     admin_login(){
         setTitle("Admin Login");
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));
+
+        //adding icon to the frame
+        icon = new ImageIcon("Screenshots/car.png");
+        this.setIconImage(icon.getImage());
 
         //header panel
         header = new JPanel();
@@ -67,7 +72,6 @@ public class admin_login extends JFrame implements ActionListener {
         lnk.setBorderPainted(false);
         lnk.addActionListener(this);
         body.add(lnk,"span,align center,wrap");
-
 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

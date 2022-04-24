@@ -9,21 +9,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 
 public class Main extends JFrame implements ActionListener {
-    JPanel header;
-    JPanel body;
-    JLabel top,username,regID;
-    JTextField uname, reg;
-    jbtn login;
-    JButton lnk;
-
+    private JPanel header;
+    private JPanel body;
+    private JLabel top,username,regID;
+    private JTextField uname, reg;
+    private jbtn login;
+    private JButton lnk;
+    private ImageIcon icon;
     Main(){
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));
+
+        //adding icon to the frame
+        icon = new ImageIcon("Screenshots/car.png");
+        this.setIconImage(icon.getImage());
 
         //header panel
         header = new JPanel();
@@ -49,7 +51,7 @@ public class Main extends JFrame implements ActionListener {
         uname.setFont(new Font("Arial", Font.PLAIN, 20));
         body.add(username,"align right");
         body.add(uname,"wmin 230,wrap");
-        regID = new JLabel("ID:");
+        regID = new JLabel("Roll-no:");
         regID.setFont(new Font("Raleway", Font.BOLD, 25));
         reg = new JTextField();
         reg.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -89,27 +91,18 @@ public class Main extends JFrame implements ActionListener {
             admin_login al = new admin_login();
         }
         if(evt.getSource()==login)
-        {String r = reg.getText(), n = uname.getText();
-
+        {
             this.dispose();
             startmenu s = new startmenu(uname.getText(),reg.getText());
 
         }
     }
 
-
     //main runner
 
     public static void main(String[] args) {
-//    	admin_add a = new admin_add();
         Main m = new Main();
-//           result_table r =  new result_table();
-//test t = new test();
-// this is commented right now
-//    admin_login log = new admin_login();
-//        admin add = new admin();
-//        String name  = "dhruv";
-//        startmenu s = new startmenu("ls","dsfsd");
+        System.out.println("\n\nPresent Project Directory : "+ System.getProperty("user.dir"));
     }
 
 }

@@ -11,27 +11,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-
-
 public class admin extends JFrame implements ActionListener {
 
-
-
-
-JLabel head,h2,qn;
-JPanel header,bottom,body;
-JScrollPane scroll;
-jbtn clear, add;
-JButton lnk;
-JToggleButton x;
-JTextField drop;
-String columnName[]={"question_no","question"};
-
-
+    private JLabel head,h2,qn;
+    private JPanel header,bottom;
+    private JScrollPane scroll;
+    private jbtn clear, add;
+    private JButton lnk;
+    private JTextField drop;
+    private String[] columnName={"question_no","question"};
+    ImageIcon icon;
 admin(){
     setTitle("admin panel");
     this.setLayout(new BorderLayout());
     getContentPane().setBackground(Color.decode("#f4f4f4"));
+
+    //adding icon to the frame
+    icon = new ImageIcon("Screenshots/car.png");
+    this.setIconImage(icon.getImage());
 
     //header panel
     header = new JPanel();
@@ -47,19 +44,14 @@ admin(){
     h2.setFont(new Font("Osward",Font.PLAIN,15));
     header.add(h2,"align center");
 
-
-
-
-//    body = new JPanel();
-//    body.setPreferredSize(new Dimension(700,600));
-////    body.setBackground(Color.decode("#333"));
-//    this.add(body,BorderLayout.CENTER);
-//    body.setLayout(new GridLayout(0,1,0,0));
+    //Table created for displaying questions
     DefaultTableModel model = new DefaultTableModel();
     model.setColumnIdentifiers(columnName);
     JTable table = new JTable();
     table.setModel(model);
-    table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+    table.getColumnModel().getColumn(0).setMaxWidth(100);
+    table.getColumnModel().getColumn(0).setMinWidth(100);
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     table.setFillsViewportHeight(true);
     table.setRowHeight(30);
     table.setFocusable(false);
@@ -67,6 +59,7 @@ admin(){
 
     table.setFont(new Font("Raleway",Font.BOLD,15));
     DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)table.getDefaultRenderer(Object.class);
+
     renderer.setHorizontalAlignment( SwingConstants.CENTER );
     String question;
     int question_no;
@@ -84,14 +77,6 @@ admin(){
             question_no = rs.getInt("question_no");
             question = rs.getString("question");
             model.addRow(new Object[]{question_no,question});
-//            x = new JToggleButton(i + ". " + rs.getString(2));
-//            x.setBackground(Color.white);
-//            x.setBorderPainted(false);
-//            x.setFocusPainted(false);
-//            x.setFont(new Font("Raleway", Font.BOLD, 15));
-//            x.setBounds(0, 0, 500, 5);
-//            body.add(x);
-//            i++;
         }
         s.close();
         c.close();
@@ -135,9 +120,6 @@ admin(){
     lnk.addActionListener(this);
     bottom.add(lnk,"span,align center,wrap");
 
-
-
-
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setResizable(false);
     this.setSize(700,600);
@@ -177,7 +159,7 @@ admin(){
             query = "ALTER TABLE question AUTO_INCREMENT=1;";
             s.executeUpdate(query);
         } catch (SQLException | ClassNotFoundException em) {
-            System.out.println(em);
+            em.printStackTrace();
         }
         JOptionPane.showMessageDialog(null,"Question has been deleted!!!","Success", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();

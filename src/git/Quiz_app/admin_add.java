@@ -14,18 +14,23 @@ public class admin_add extends JFrame implements ActionListener {
     JPanel body;
     JLabel head, Q,o1, o2, o3, o4,ans;
 
-    JTextField question,an;
-    JTextField opt1;
-    JTextField opt2;
-    JTextField opt3;
-    JTextField opt4;
-    jbtn submit,clear;
-    JButton lnk ;
+    private JTextField question,an;
+    private  JTextField opt1;
+    private  JTextField opt2;
+    private JTextField opt3;
+    private JTextField opt4;
+    private  jbtn submit,clear;
+    private JButton lnk ;
+    private ImageIcon icon;
 
     admin_add(){
         setTitle("Admin add questions");
         this.setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#f4f4f4"));
+
+        //adding icon to the frame
+        icon = new ImageIcon("Screenshots/car.png");
+        this.setIconImage(icon.getImage());
 
         //header panel
         header = new JPanel();
@@ -86,9 +91,6 @@ public class admin_add extends JFrame implements ActionListener {
         opt4.setBounds(205,265,230,20);
         body.add(o4,"align right");
         body.add(opt4,"wmin 230, wmax 230,align left,wrap 20px");
-
-
-
 
 
         //submit button

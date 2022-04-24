@@ -12,20 +12,51 @@ import java.util.ArrayList;
 
 public class startmenu extends JFrame implements ActionListener {
 
-   JPanel header,body,footer;
-   JLabel head,h2,inst, inf1,inf2, inf3;
-   JButton starmit;
+    private JPanel header,body,footer;
+    private JLabel head,h2,inst, inf1,inf2, inf3;
+    private JButton starmit;
    int count=0,marks=0;
-   JRadioButton o1, o2, o3, o4;
-   ButtonGroup group;
+    private JRadioButton o1, o2, o3, o4;
+    private ButtonGroup group;
    Connection c;
    Statement s;
    ResultSet rs;
    ArrayList<Integer> arr;
    user use;
+    String time;
+    ImageIcon icon;
+    JLabel samay = new JLabel("Time: 00:00");
+    Runnable r1 = new Runnable() {
+        @Override
+        public void run() {
+            Timer tm = new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    passedtime+=1000;
+                    min = (passedtime/60000)%60;
+                    sec = (passedtime/1000)%60;
+                    secs = String.format("%02d", sec);
+                    mins = String.format("%02d", min);
+                    samay.setText("Time: "+mins+":"+secs);
+                    time=mins+" mins " +secs+" secs ";
+                }
+            });
+            tm.start();
+        }
+    };
+    Thread t1 = new Thread(r1);
+    int passedtime = 0;
+    int min = 0;
+    int sec = 0;
+    String secs = String.format("%02d", sec);
+    String mins = String.format("%02d", min);
 
 startmenu(){}
 startmenu(String name,String reg){
+    //adding icon to the frame
+    icon = new ImageIcon("Screenshots/car.png");
+    this.setIconImage(icon.getImage());
+
     //connection to mysql
     try {
             //connecting to dbms for fetching question
@@ -44,6 +75,7 @@ startmenu(String name,String reg){
             setTitle("Start Menu");
             this.setLayout(new BorderLayout());
             getContentPane().setBackground(Color.decode("#f4f4f4"));
+
             //header panel
             header = new JPanel();
             header.setPreferredSize(new Dimension(100,100));
@@ -63,7 +95,7 @@ startmenu(String name,String reg){
             body.setPreferredSize(new Dimension(700,400));
             body.setBackground(Color.white);
             this.add(body, BorderLayout.CENTER);
-            body.setLayout(new MigLayout(" ","[:100, grow, center][grow, left]",""));
+            body.setLayout(new MigLayout("fillx","[:100,grow, center][grow, left]",""));
             inst = new JLabel("Instructions");
             inst.setFont(new Font("Raleway",Font.BOLD,25));
             body.add(inst,"align left,wrap");
@@ -121,8 +153,9 @@ startmenu(String name,String reg){
             arr = randGen(max);
             System.out.println(max);
         }
-        catch(Exception error){
-            System.out.println("you fucking idiot programmer");//hello cpp
+        catch(SQLException | ClassNotFoundException error){
+            System.out.println("System Requirements not fulfilled!\nAborting...");//hello cpp
+            error.printStackTrace();
     }
 }
 private void qset(ResultSet rs){
@@ -131,6 +164,7 @@ private void qset(ResultSet rs){
         body.revalidate();
         body.repaint();
         rs.next();
+        samay.setFont(new Font("Raleway", Font.BOLD, 18));
         String question = rs.getString(2);
         String opt1 = rs.getString(3);
         String opt2 = rs.getString(4);
@@ -141,9 +175,12 @@ private void qset(ResultSet rs){
         body.setBackground(Color.white);
         this.add(body,BorderLayout.CENTER);
         body.setLayout(new MigLayout("fillx","[grow, left]",""));
+        body.add(samay, "align center, wrap, newline 20");
+
         inst = new JLabel(question);
         inst.setFont(new Font("Raleway",Font.BOLD,25));
-        body.add(inst, "align left,newline 30, wrap");
+        body.add(inst, "align left,span 2, wrap, wmax 700px,newline 30");
+
         o1 = new JRadioButton(opt1);
         o1.setBorderPainted(false);
         o1.setBackground(Color.white);
@@ -161,7 +198,6 @@ private void qset(ResultSet rs){
                 }
             }
         });
-
 
         o2= new JRadioButton(opt2);
         o2.setBorderPainted(false);
@@ -197,8 +233,6 @@ private void qset(ResultSet rs){
             }
         });
 
-//        System.out.println("this is running"+ question);
-
         o4 = new JRadioButton(opt4);
         o4.setBorderPainted(false);
         o4.setBackground(Color.white);
@@ -216,15 +250,13 @@ private void qset(ResultSet rs){
                 }
             }
         });
-
-
-
     }
     catch(SQLException e) {
         e.printStackTrace();
     }
 }
 
+    //random array generator
     public static ArrayList<Integer> randGen(int max){
         ArrayList<Integer> arr = new ArrayList<>();
         int min = 1;
@@ -245,7 +277,11 @@ private void qset(ResultSet rs){
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==starmit) {
-        if (count < 3) {
+            if(count ==0) {
+                t1.start();
+                System.out.println("Timer started");
+            }
+            if (count < 5) {
                 System.out.println("start button changed to submit button");
                 starmit.setText("NEXT");
                 String query = "SELECT * FROM question where question_no="+ arr.get(count) +";";
@@ -257,31 +293,42 @@ private void qset(ResultSet rs){
                 body.removeAll();
                 body.revalidate();
                 body.repaint();
+                body.add(samay, BorderLayout.SOUTH);
                 qset(rs);
                 System.out.println(marks);
                 count++;
+
+                //changing to submit btn at last question
+                if(count ==5)
+                {starmit.setText("SUBMIT");
+                System.out.println("changing button to submit");}
             }
             else{
-                System.out.println("changing button to submit");
-                starmit.setText("SUBMIT");
+
+
                 System.out.println(marks);
                 use.marks = marks;
+                t1.stop();
+                System.out.println(time);
+                use.time = time;
                 try{
+
                     //connecting to dbms for fetching question
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     c = DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com/sql6450129", "sql6450129", "iJ8zlh5CCx");
                     Statement s = c.createStatement();
-                    String query = "INSERT INTO users (id,name,userid,correctans) VALUES (DEFAULT,'"
+                    String query = "INSERT INTO users (id,name,userid,correctans,time) VALUES (DEFAULT,'"
                             + use.name + "','"
                             + use.regID + "',"
-                            + use.marks + ");";
+                            + use.marks + ",'"
+                            + use.time + "');";
                     s.executeUpdate(query);
                     s.close();
                     c.close();
                     JOptionPane.showMessageDialog(null,"You have successfully submitted the quiz!!!","Successfull", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                     result_table r = new result_table();
-                }catch (Exception en){
+                }catch (SQLException | ClassNotFoundException en){
                     en.printStackTrace();
                 }
             }
